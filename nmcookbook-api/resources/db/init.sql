@@ -1,0 +1,7 @@
+CREATE USER nmcookbook WITH ENCRYPTED PASSWORD 'nmcookbook';
+CREATE DATABASE nmcookbook;
+GRANT ALL PRIVILEGES ON DATABASE nmcookbook TO nmcookbook;
+
+CREATE USER keycloak WITH ENCRYPTED PASSWORD 'keycloak';
+CREATE DATABASE keycloak;
+GRANT ALL PRIVILEGES ON DATABASE keycloak TO keycloak;

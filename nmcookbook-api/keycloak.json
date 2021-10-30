@@ -1,0 +1,8 @@
+{
+    "realm": "nmcookbook",
+    "auth-server-url": "http://localhost:28080/auth/",
+    "ssl-required": "external",
+    "resource": "nmuser",
+    "public-client": true,
+    "confidential-port": 0
+  }
