@@ -1,0 +1,213 @@
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+   <changeSet id="init-1" author="dev">
+        <createTable tableName="recipe">
+            <column name="recipeId" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_recipeId"/>
+            </column>
+            <column name="title" type="VARCHAR(255)"/>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="preparationSteps" type="VARCHAR(255)"/>
+            <column name="preparationTime" type="INTEGER"/>
+            <column name="difficultyLevel" type="INTEGER"/>
+            <column name="statId" type="VARCHAR(255)"/>
+            <column name="image" type="VARCHAR(255)"/>
+            <column name="createdAt" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="createdBy" type="VARCHAR(255)"/>
+            <column name="modifiedAt" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="modifiedBy" type="VARCHAR(255)"/>
+        </createTable>
+   </changeSet>
+   <changeSet id="init-2" author="dev">
+        <createTable tableName="stat">
+            <column name="statId" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_statId"/>
+            </column>
+            <column name="recipeId" type="VARCHAR(255)"/>
+            <column name="views" type="INTEGER"/>
+            <column name="rating" type="FLOAT"/>
+            <column name="createdAt" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="createdBy" type="VARCHAR(255)"/>
+            <column name="modifiedAt" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="modifiedBy" type="VARCHAR(255)"/>
+        </createTable>
+   </changeSet>
+   <changeSet id="init-3" author="dev">
+        <createTable tableName="article">
+            <column name="articleId" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_articleId"/>
+            </column>
+            <column name="articleName" type="VARCHAR(255)"/>
+            <column name="createdAt" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="createdBy" type="VARCHAR(255)"/>
+            <column name="modifiedAt" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="modifiedBy" type="VARCHAR(255)"/>
+        </createTable>
+   </changeSet>
+   <changeSet id="init-4" author="dev">
+        <createTable tableName="unit">
+            <column name="unitId" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_unitId"/>
+            </column>
+            <column name="symbol" type="VARCHAR(255)"/>
+            <column name="createdAt" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="createdBy" type="VARCHAR(255)"/>
+            <column name="modifiedAt" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="modifiedBy" type="VARCHAR(255)"/>
+        </createTable>
+   </changeSet>
+   <changeSet id="init-5" author="dev">
+        <createTable tableName="ingredient">
+            <column name="ingredientId" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_ingredientId"/>
+            </column>
+            <column name="recipeId" type="VARCHAR(255)"/>
+            <column name="articleId" type="VARCHAR(255)"/>
+            <column name="unitId" type="VARCHAR(255)"/>
+            <column name="quantity" type="INTEGER"/>
+            <column name="createdAt" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="createdBy" type="VARCHAR(255)"/>
+            <column name="modifiedAt" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="modifiedBy" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="init-6" author="dev">
+        <createTable tableName="category">
+            <column name="categoryId" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_categoryId"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="createdAt" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="createdBy" type="VARCHAR(255)"/>
+            <column name="modifiedAt" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="modifiedBy" type="VARCHAR(255)"/>
+        </createTable>
+   </changeSet>
+   <changeSet id="init-7" author="dev">
+        <createTable tableName="category_recipe">
+            <column name="categoryRecipeId" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_categoryRecipeId"/>
+            </column>
+            <column name="recipeId" type="VARCHAR(255)"/>
+            <column name="categoryId" type="VARCHAR(255)"/>
+            <column name="createdAt" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="createdBy" type="VARCHAR(255)"/>
+            <column name="modifiedAt" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="modifiedBy" type="VARCHAR(255)"/>
+        </createTable>
+   </changeSet>
+   <changeSet id="init-8" author="dev">
+        <createTable tableName="rating">
+            <column name="ratingId" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_ratingId"/>
+            </column>
+            <column name="recipeId" type="VARCHAR(255)"/>
+            <column name="userId" type="VARCHAR(255)"/>
+            <column name="rating" type="INTEGER"/>
+            <column name="createdAt" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="createdBy" type="VARCHAR(255)"/>
+            <column name="modifiedAt" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="modifiedBy" type="VARCHAR(255)"/>
+        </createTable>
+   </changeSet>
+   <changeSet id="init-9" author="dev">
+        <addForeignKeyConstraint 
+            baseColumnNames="statId"
+            baseTableName="recipe"
+            constraintName="fk_recipe_stat"
+            deferrable="true"
+            initiallyDeferred="true"
+            onDelete="CASCADE"
+            onUpdate="RESTRICT"
+            referencedColumnNames="statId"
+            referencedTableName="stat"/>
+   </changeSet>
+   <changeSet id="init-10" author="dev">
+        <addForeignKeyConstraint 
+            baseColumnNames="recipeId"
+            baseTableName="stat"
+            constraintName="fk_stat_recipe"
+            deferrable="true"
+            initiallyDeferred="true"
+            onDelete="CASCADE"
+            onUpdate="RESTRICT"
+            referencedColumnNames="recipeId"
+            referencedTableName="recipe"/>
+   </changeSet>
+   <changeSet id="init-11" author="dev">
+        <addForeignKeyConstraint 
+            baseColumnNames="recipeId"
+            baseTableName="ingredient"
+            constraintName="fk_ingredient_recipe"
+            deferrable="true"
+            initiallyDeferred="true"
+            onDelete="CASCADE"
+            onUpdate="RESTRICT"
+            referencedColumnNames="recipeId"
+            referencedTableName="recipe"/>
+   </changeSet>
+   <changeSet id="init-12" author="dev">
+        <addForeignKeyConstraint 
+            baseColumnNames="articleId"
+            baseTableName="ingredient"
+            constraintName="fk_ingredient_article"
+            deferrable="true"
+            initiallyDeferred="true"
+            onDelete="CASCADE"
+            onUpdate="RESTRICT"
+            referencedColumnNames="articleId"
+            referencedTableName="article"/>
+   </changeSet>
+   <changeSet id="init-13" author="dev">
+        <addForeignKeyConstraint 
+            baseColumnNames="unitId"
+            baseTableName="ingredient"
+            constraintName="fk_ingredient_unit"
+            deferrable="true"
+            initiallyDeferred="true"
+            onDelete="CASCADE"
+            onUpdate="RESTRICT"
+            referencedColumnNames="unitId"
+            referencedTableName="unit"/>
+   </changeSet>
+   <changeSet id="init-14" author="dev">
+        <addForeignKeyConstraint 
+            baseColumnNames="recipeId"
+            baseTableName="category_recipe"
+            constraintName="fk_category_recipe_recipe"
+            deferrable="true"
+            initiallyDeferred="true"
+            onDelete="CASCADE"
+            onUpdate="RESTRICT"
+            referencedColumnNames="recipeId"
+            referencedTableName="recipe"/>
+   </changeSet>
+   <changeSet id="init-15" author="dev">
+        <addForeignKeyConstraint 
+            baseColumnNames="categoryId"
+            baseTableName="category_recipe"
+            constraintName="fk_category_recipe_category"
+            deferrable="true"
+            initiallyDeferred="true"
+            onDelete="CASCADE"
+            onUpdate="RESTRICT"
+            referencedColumnNames="categoryId"
+            referencedTableName="category"/>
+   </changeSet>
+   <changeSet id="init-16" author="dev">
+        <addForeignKeyConstraint 
+            baseColumnNames="recipeId"
+            baseTableName="rating"
+            constraintName="fk_rating_recipe"
+            deferrable="true"
+            initiallyDeferred="true"
+            onDelete="CASCADE"
+            onUpdate="RESTRICT"
+            referencedColumnNames="recipeId"
+            referencedTableName="recipe"/>
+   </changeSet>
+</databaseChangeLog>

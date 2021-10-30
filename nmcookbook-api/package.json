@@ -9,6 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "liquibase": "^4.4.0",
+    "node-liquibase": "^4.1.1"
   }
 }
