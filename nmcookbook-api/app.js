@@ -1,25 +1,22 @@
-const express = require('express')
-const app = express()
-const port = 8000
+import express from 'express'
+import { Liquibase } from 'node-liquibase'
+import swaggerUI from 'swagger-ui-express'
+import { PORT, liquibaseConfig, swaggerOptions } from './config.js'
+import recipesRouter from './routes/recipes.js'
+import { readFile } from 'fs/promises'
 
-const Liquibase = require('node-liquibase').Liquibase;
-const POSTGRESQL_DEFAULT_CONFIG = require('node-liquibase').POSTGRESQL_DEFAULT_CONFIG;
-
-const myConfig = {
-  ...POSTGRESQL_DEFAULT_CONFIG,
-  changeLogFile: './resources/db/liquibase/changeLog.xml',
-  url: 'jdbc:postgresql://localhost:5432/nmcookbook',
-  username: 'nmcookbook',
-  password: 'nmcookbook',
-}
-const instTs = new Liquibase(myConfig);
-
+const instTs = new Liquibase(liquibaseConfig);
 instTs.update();
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+const app = express()
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+const swaggerJson = JSON.parse(
+  await readFile(new URL('./swagger.json', import.meta.url))
+)
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerJson));
+
+app.use("/recipes", recipesRouter)
+
+app.listen(PORT, () => {
+  //console.log(`App listening at http://localhost:${PORT}`)
 })
