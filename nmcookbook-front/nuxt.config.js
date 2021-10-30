@@ -48,12 +48,50 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    '@nuxtjs/i18n'
+    '@nuxtjs/i18n',
+    '@nuxtjs/auth-next',
+    '@nuxtjs/proxy'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: process.env.NODE_ENV || 'http://localhost:8000'
+    baseURL: process.env.NODE_ENV || 'http://localhost:8000',
+    proxy: true
+  },
+  auth: {
+    strategies: {
+      local: false,
+      keycloak: {
+        scheme: 'oauth2',
+        endpoints: {
+          authorization: 'http://localhost:28080/auth/realms/nmcookbook/protocol/openid-connect/auth',
+          token: 'http://localhost:28080/auth/realms/nmcookbook/protocol/openid-connect/token',
+          userInfo: 'http://localhost:28080/auth/realms/nmcookbook/protocol/openid-connect/userinfo',
+          logout: 'http://localhost:28080/auth/realms/nmcookbook/protocol/openid-connect/logout?redirect_uri=' + encodeURIComponent('https://localhost:3000')
+        },
+        token: {
+          property: 'access_token',
+          type: 'Bearer',
+          name: 'Authorization',
+          maxAge: 300
+        },
+        refreshToken: {
+          property: 'refresh_token',
+          maxAge: 60 * 60 * 24 * 30
+        },
+        responseType: 'code',
+        grantType: 'authorization_code',
+        clientId: 'nmclient',
+        scope: ['openid', 'profile', 'email'],
+        codeChallengeMethod: 'S256'
+      }
+    },
+    redirect: false
+  },
+
+
+  router: {
+    middleware: ['auth', 'loginRedirect']
   },
 
   // I18n module configuration: https://i18n.nuxtjs.org/setup

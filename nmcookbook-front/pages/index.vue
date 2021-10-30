@@ -8,14 +8,8 @@
   </v-row>
 </template>
 
-<script lang="ts">
-import { Ref, ref } from '@nuxtjs/composition-api'
-import Vue from 'vue'
-
-export default Vue.extend({
-  name: 'Index',
-  setup() {
-    const recipes: Ref<any[]> = ref([])
-  }
-})
+<script>
+export default {
+  auth: false
+}
 </script>

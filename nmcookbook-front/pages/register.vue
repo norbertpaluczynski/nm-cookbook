@@ -44,13 +44,14 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import qs from 'qs'
 import { Ref, ref, useContext } from '@nuxtjs/composition-api'
 
 export default Vue.extend({
   name: 'LoginPage',
   layout: 'auth',
   setup() {
-    const { i18n, redirect } = useContext()
+    const { i18n, redirect, app } = useContext()
 
     const valid: Ref<boolean> = ref(false)
     const username: Ref<string> = ref('')
@@ -68,7 +69,34 @@ export default Vue.extend({
 
     const submit = () => {
       console.log(username.value, password.value)
-      redirect('/')
+      const data = {
+        'username':'admin',
+        'password':'admin',
+        'grant_type':'password',
+        'client_id':'admin-cli'
+      }
+      
+      app.$axios.post('http://localhost:28080/auth/realms/master/protocol/openid-connect/token', qs.stringify(data))
+        .then(response => {
+          const token = response.data.access_token
+          const headers = {
+            'Content-Type':'application/json',
+            'Authorization':'Bearer ' + token
+          }
+          const body = {
+            "username": username.value,
+            "enabled": true,
+            "credentials": [{
+              "type": "password",
+              "value": password.value,
+              "temporary": false
+            }]
+          }
+          app.$axios.post('http://localhost:28080/auth/admin/realms/nmcookbook/users', body, {headers})
+            .then(response => {
+              redirect('/')
+            })
+        })
     }
 
     return {
