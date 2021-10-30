@@ -28,6 +28,8 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    '~/plugins/axios',
+    '~/plugins/vuetify'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -50,7 +52,9 @@ export default {
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    baseURL: process.env.NODE_ENV || 'http://localhost:8000'
+  },
 
   // I18n module configuration: https://i18n.nuxtjs.org/setup
   i18n: {
@@ -86,5 +90,6 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    vendor: ['vuetify']
   }
 }
