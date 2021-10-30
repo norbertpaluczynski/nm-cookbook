@@ -1,0 +1,22 @@
+{
+  "buttons": {
+    "login": "Log in",
+    "register": "Register"
+  },
+  "labels": {
+    "username": "Username",
+    "password": "Password",
+    "email": "Email",
+    "repeatPassword": "Repeat password"
+  },
+  "input-errors": {
+    "required": "Required",
+    "email": "Invalid email",
+    "password": "Passwords are not the same",
+    "minLength": "Password should be at least 8 marks length"
+  },
+  "headers": {
+    "login": "Sign in",
+    "register": "Sign up"
+  }
+}

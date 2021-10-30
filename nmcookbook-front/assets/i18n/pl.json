@@ -1,0 +1,22 @@
+{
+  "buttons": {
+    "login": "Zaloguj",
+    "register": "Zarejestruj"
+  },
+  "labels": {
+    "username": "Nazwa użytkownika",
+    "password": "Hasło",
+    "email": "Email",
+    "repeatPassword": "Powtórz hasło"
+  },
+  "input-errors": {
+    "required": "Pole wymagane",
+    "email": "Niepoprawny adres email",
+    "password": "Podane hasła nie są takie same",
+    "minLength": "Hasło powinno mieć co najmniej 8 znaków"
+  },
+  "headers": {
+    "login": "Logowanie",
+    "register": "Rejestracja"
+  }
+}
