@@ -14,7 +14,6 @@
             <column name="preparationSteps" type="VARCHAR(255)"/>
             <column name="preparationTime" type="INTEGER"/>
             <column name="difficultyLevel" type="INTEGER"/>
-            <column name="statId" type="VARCHAR(255)"/>
             <column name="image" type="VARCHAR(255)"/>
             <column name="createdAt" type="TIMESTAMP WITHOUT TIME ZONE"/>
             <column name="createdBy" type="VARCHAR(255)"/>
@@ -116,18 +115,6 @@
    </changeSet>
    <changeSet id="init-9" author="dev">
         <addForeignKeyConstraint 
-            baseColumnNames="statId"
-            baseTableName="recipe"
-            constraintName="fk_recipe_stat"
-            deferrable="true"
-            initiallyDeferred="true"
-            onDelete="CASCADE"
-            onUpdate="RESTRICT"
-            referencedColumnNames="statId"
-            referencedTableName="stat"/>
-   </changeSet>
-   <changeSet id="init-10" author="dev">
-        <addForeignKeyConstraint 
             baseColumnNames="recipeId"
             baseTableName="stat"
             constraintName="fk_stat_recipe"
@@ -138,7 +125,7 @@
             referencedColumnNames="recipeId"
             referencedTableName="recipe"/>
    </changeSet>
-   <changeSet id="init-11" author="dev">
+   <changeSet id="init-10" author="dev">
         <addForeignKeyConstraint 
             baseColumnNames="recipeId"
             baseTableName="ingredient"
@@ -150,7 +137,7 @@
             referencedColumnNames="recipeId"
             referencedTableName="recipe"/>
    </changeSet>
-   <changeSet id="init-12" author="dev">
+   <changeSet id="init-11" author="dev">
         <addForeignKeyConstraint 
             baseColumnNames="articleId"
             baseTableName="ingredient"
@@ -162,7 +149,7 @@
             referencedColumnNames="articleId"
             referencedTableName="article"/>
    </changeSet>
-   <changeSet id="init-13" author="dev">
+   <changeSet id="init-12" author="dev">
         <addForeignKeyConstraint 
             baseColumnNames="unitId"
             baseTableName="ingredient"
@@ -174,7 +161,7 @@
             referencedColumnNames="unitId"
             referencedTableName="unit"/>
    </changeSet>
-   <changeSet id="init-14" author="dev">
+   <changeSet id="init-13" author="dev">
         <addForeignKeyConstraint 
             baseColumnNames="recipeId"
             baseTableName="category_recipe"
@@ -186,7 +173,7 @@
             referencedColumnNames="recipeId"
             referencedTableName="recipe"/>
    </changeSet>
-   <changeSet id="init-15" author="dev">
+   <changeSet id="init-14" author="dev">
         <addForeignKeyConstraint 
             baseColumnNames="categoryId"
             baseTableName="category_recipe"
@@ -198,7 +185,7 @@
             referencedColumnNames="categoryId"
             referencedTableName="category"/>
    </changeSet>
-   <changeSet id="init-16" author="dev">
+   <changeSet id="init-15" author="dev">
         <addForeignKeyConstraint 
             baseColumnNames="recipeId"
             baseTableName="rating"
