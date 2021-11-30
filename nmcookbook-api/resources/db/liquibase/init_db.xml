@@ -28,7 +28,6 @@
             </column>
             <column name="recipeId" type="VARCHAR(255)"/>
             <column name="views" type="INTEGER"/>
-            <column name="rating" type="FLOAT"/>
             <column name="createdAt" type="TIMESTAMP WITHOUT TIME ZONE"/>
             <column name="createdBy" type="VARCHAR(255)"/>
             <column name="modifiedAt" type="TIMESTAMP WITHOUT TIME ZONE"/>
@@ -41,6 +40,8 @@
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_articleId"/>
             </column>
             <column name="articleName" type="VARCHAR(255)"/>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="alcoholVolume" type="DECIMAL"/>
             <column name="createdAt" type="TIMESTAMP WITHOUT TIME ZONE"/>
             <column name="createdBy" type="VARCHAR(255)"/>
             <column name="modifiedAt" type="TIMESTAMP WITHOUT TIME ZONE"/>
@@ -107,6 +108,7 @@
             <column name="recipeId" type="VARCHAR(255)"/>
             <column name="userId" type="VARCHAR(255)"/>
             <column name="rating" type="INTEGER"/>
+            <column name="comment" type="VARCHAR(1024)"/>
             <column name="createdAt" type="TIMESTAMP WITHOUT TIME ZONE"/>
             <column name="createdBy" type="VARCHAR(255)"/>
             <column name="modifiedAt" type="TIMESTAMP WITHOUT TIME ZONE"/>

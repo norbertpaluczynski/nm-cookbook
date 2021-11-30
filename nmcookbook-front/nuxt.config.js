@@ -6,8 +6,8 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - nm-cookbook',
-    title: 'nm-cookbook',
+    titleTemplate: '%s - nm-drinkbook',
+    title: 'nm-drinkbook',
     htmlAttrs: {
       lang: 'en'
     },
@@ -64,10 +64,10 @@ export default {
       keycloak: {
         scheme: 'oauth2',
         endpoints: {
-          authorization: 'http://localhost:28080/auth/realms/nmcookbook/protocol/openid-connect/auth',
-          token: 'http://localhost:28080/auth/realms/nmcookbook/protocol/openid-connect/token',
-          userInfo: 'http://localhost:28080/auth/realms/nmcookbook/protocol/openid-connect/userinfo',
-          logout: 'http://localhost:28080/auth/realms/nmcookbook/protocol/openid-connect/logout?redirect_uri=' + encodeURIComponent('https://localhost:3000')
+          authorization: 'http://localhost:28080/auth/realms/nmdrinkbook/protocol/openid-connect/auth',
+          token: 'http://localhost:28080/auth/realms/nmdrinkbook/protocol/openid-connect/token',
+          userInfo: 'http://localhost:28080/auth/realms/nmdrinkbook/protocol/openid-connect/userinfo',
+          logout: 'http://localhost:28080/auth/realms/nmdrinkbook/protocol/openid-connect/logout?redirect_uri=' + encodeURIComponent('https://localhost:3000')
         },
         token: {
           property: 'access_token',

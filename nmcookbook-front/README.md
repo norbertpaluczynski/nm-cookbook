@@ -1,4 +1,4 @@
-# nm-cookbook
+# nm-drinkbook
 
 ## Build Setup
 

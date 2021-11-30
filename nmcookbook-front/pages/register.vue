@@ -92,7 +92,7 @@ export default Vue.extend({
               "temporary": false
             }]
           }
-          app.$axios.post('http://localhost:28080/auth/admin/realms/nmcookbook/users', body, {headers})
+          app.$axios.post('http://localhost:28080/auth/admin/realms/nmdrinkbook/users', body, {headers})
             .then(response => {
               redirect('/')
             })
