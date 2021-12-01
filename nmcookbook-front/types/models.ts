@@ -1,5 +1,6 @@
 export interface Recipe {
   recipeId?: string
+  stateId: string
   title: string
   description: string
   preparatioSteps: string
@@ -30,6 +31,11 @@ export interface Unit {
 
 export interface Category {
   categoryId?: string
+  name: string
+}
+
+export interface State {
+  stateId?: number
   name: string
 }
 
