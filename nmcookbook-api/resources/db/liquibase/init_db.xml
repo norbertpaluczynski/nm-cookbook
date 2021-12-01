@@ -9,6 +9,7 @@
             <column name="recipeId" type="VARCHAR(255)">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_recipeId"/>
             </column>
+            <column name="stateId" type="VARCHAR(255)"/>
             <column name="title" type="VARCHAR(255)"/>
             <column name="description" type="VARCHAR(255)"/>
             <column name="preparationSteps" type="VARCHAR(255)"/>
@@ -198,5 +199,25 @@
             onUpdate="RESTRICT"
             referencedColumnNames="recipeId"
             referencedTableName="recipe"/>
+   </changeSet>
+   <changeSet id="init-16" author="dev">
+        <createTable tableName="state">
+            <column name="stateId" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_stateId"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+   </changeSet>
+   <changeSet id="init-17" author="dev">
+        <addForeignKeyConstraint 
+            baseColumnNames="stateId"
+            baseTableName="recipe"
+            constraintName="fk_state_recipe"
+            deferrable="true"
+            initiallyDeferred="true"
+            onDelete="CASCADE"
+            onUpdate="RESTRICT"
+            referencedColumnNames="stateId"
+            referencedTableName="state"/>
    </changeSet>
 </databaseChangeLog>
