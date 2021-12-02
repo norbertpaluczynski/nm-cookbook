@@ -39,9 +39,16 @@ services:
     ports:
       - "28080:8080"
     volumes:
-      - ./resources/keycloak/realm-export.json:/opt/jboss/keycloak/imports/realm-export.json
+      - ./resources/keycloak/keycloak-export.json:/opt/jboss/keycloak/imports/keycloak-export.json
     command:
-      - "-b 0.0.0.0 -Dkeycloak.import=/opt/jboss/keycloak/imports/realm-export.json"
+      [
+        '-b',
+        '0.0.0.0',
+        '-Dkeycloak.migration.action=import',
+        '-Dkeycloak.migration.provider=singleFile',
+        '-Dkeycloak.migration.file=/opt/jboss/keycloak/imports/keycloak-export.json',
+        '-Dkeycloak.migration.strategy=OVERWRITE_EXISTING',
+      ]
     restart: unless-stopped
 
 volumes:
