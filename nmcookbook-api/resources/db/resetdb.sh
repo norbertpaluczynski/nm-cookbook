@@ -1,0 +1,3 @@
+#!/bin/bash
+./node_modules/node-liquibase/dist/liquibase/liquibase --url="jdbc:postgresql://localhost:5432/nmdrinkbook" --username="nmdrinkbook" --password="nmdrinkbook" --classpath="./node_modules/node-liquibase/dist/drivers/postgresql-42.2.8.jar" dropAll
+./node_modules/node-liquibase/dist/liquibase/liquibase --changeLogFile="./resources/db/liquibase/changeLog.xml" --url="jdbc:postgresql://localhost:5432/nmdrinkbook" --username="nmdrinkbook" --password="nmdrinkbook" --classpath="./node_modules/node-liquibase/dist/drivers/postgresql-42.2.8.jar" update
