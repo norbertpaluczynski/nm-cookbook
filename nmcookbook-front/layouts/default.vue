@@ -51,10 +51,6 @@ export default Vue.extend({
     const clipped: Ref<boolean> = ref(true)
     const drawer: Ref<boolean> = ref(false)
 
-    onMounted(() => {
-      console.log(app)
-    })
-
     const isDarkMode = computed({
       get: (): boolean => {
         let darkMode: boolean = true

@@ -9,13 +9,15 @@
   </v-row>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from 'vue'
+
+export default Vue.extend({
   auth: false,
   methods: {
     call () {
       this.$axios.post('localhost:8000/recipe/createEmpty', {}).then(response => console.log(response.data));
     }
   }
-}
+})
 </script>
