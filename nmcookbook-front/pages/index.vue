@@ -3,6 +3,7 @@
     <v-col cols="12" sm="8" md="6">
       <v-card class="logo py-4 d-flex justify-center">
         <NuxtLogo />
+        <v-btn @click="call"/>
       </v-card>
     </v-col>
   </v-row>
@@ -10,6 +11,11 @@
 
 <script>
 export default {
-  auth: false
+  auth: false,
+  methods: {
+    call () {
+      this.$axios.post('localhost:8000/recipe/createEmpty', {}).then(response => console.log(response.data));
+    }
+  }
 }
 </script>
