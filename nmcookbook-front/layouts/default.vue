@@ -54,7 +54,7 @@ export default Vue.extend({
     const isDarkMode = computed({
       get: (): boolean => {
         let darkMode: boolean = true
-        const mode = localStorage.getItem(ls.isDarkMode)
+        const mode = localStorage.getItem(ls.isDarkMode) || 'true'
         if (app.vuetify) app.vuetify.framework.theme.dark = darkMode = (mode == 'true')
         return darkMode
       },
