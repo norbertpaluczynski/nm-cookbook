@@ -1,0 +1,85 @@
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet id="init-state" author="dev">
+        <sql dbms="postgresql"
+            endDelimiter="end"
+            splitStatements="true"
+            stripComments="false">
+            INSERT INTO state("stateId", name) VALUES
+            (gen_random_uuid(), 'Nowy'),
+            (gen_random_uuid(), 'Prywatny'),
+            (gen_random_uuid(), 'Publiczny'),
+            (gen_random_uuid(), 'Zatwierdzony')
+        </sql>
+    </changeSet>
+    <changeSet id="init-unit" author="dev">
+        <sql dbms="postgresql"
+            endDelimiter="end"
+            splitStatements="true"
+            stripComments="false">
+            INSERT INTO unit("unitId", symbol) VALUES
+            (gen_random_uuid(), 'ml'),
+            (gen_random_uuid(), 'g'),
+            (gen_random_uuid(), 'szklanka'),
+            (gen_random_uuid(), 'szt'),
+            (gen_random_uuid(), 'łyżka'),
+            (gen_random_uuid(), 'łyżeczka'),
+            (gen_random_uuid(), 'kieliszek'),
+            (gen_random_uuid(), 'szczypta'),
+            (gen_random_uuid(), 'listek'),
+            (gen_random_uuid(), 'kostka'),
+            (gen_random_uuid(), 'plasterek')
+        </sql>
+    </changeSet>
+    <changeSet id="init-category" author="dev">
+        <sql dbms="postgresql"
+            endDelimiter="end"
+            splitStatements="true"
+            stripComments="false">
+            INSERT INTO category("categoryId", name) VALUES
+            (gen_random_uuid(), 'Bezalkoholowe'),
+            (gen_random_uuid(), 'Shoty'),
+            (gen_random_uuid(), 'Gorące'),
+            (gen_random_uuid(), 'Zimne'),
+            (gen_random_uuid(), 'Aperitif'),
+            (gen_random_uuid(), 'Short drink'),
+            (gen_random_uuid(), 'Long drink')
+        </sql>
+    </changeSet>
+    <changeSet id="init-article" author="dev">
+        <sql dbms="postgresql"
+            endDelimiter="end"
+            splitStatements="true"
+            stripComments="false">
+            INSERT INTO article("articleId", "articleName", description, "alcoholVolume") VALUES
+            (gen_random_uuid(), 'cukier biały', '', null),
+            (gen_random_uuid(), 'cukier trzcinowy', '', null),
+            (gen_random_uuid(), 'biała czysta wóda', '', 40),
+            (gen_random_uuid(), 'whisky', '', 40),
+            (gen_random_uuid(), 'lód', '', null),
+            (gen_random_uuid(), 'pepsi', '', null),
+            (gen_random_uuid(), 'cola', '', null),
+            (gen_random_uuid(), 'sok jabłkowy', '', null),
+            (gen_random_uuid(), 'sok pomarańczowy', '', null),
+            (gen_random_uuid(), 'limonka', '', null),
+            (gen_random_uuid(), 'cytryna', '', null),
+            (gen_random_uuid(), 'kawa', '', null),
+            (gen_random_uuid(), 'herbata', '', null),
+            (gen_random_uuid(), 'mleko', '', null),
+            (gen_random_uuid(), 'cynamon', '', null),
+            (gen_random_uuid(), 'gin', '', 35),
+            (gen_random_uuid(), 'piwo', '', 5),
+            (gen_random_uuid(), 'rum', '', null),
+            (gen_random_uuid(), 'białe wino', '', 12),
+            (gen_random_uuid(), 'czerwone wino', '', 12),
+            (gen_random_uuid(), 'tequilla', '', 40),
+            (gen_random_uuid(), 'Jägermeister', '', 35),
+            (gen_random_uuid(), 'napój enegetyczny', '', null),
+            (gen_random_uuid(), 'woda', '', null)
+        </sql>
+    </changeSet>
+</databaseChangeLog>

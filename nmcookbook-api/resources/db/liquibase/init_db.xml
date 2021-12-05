@@ -4,12 +4,13 @@
     xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd
     http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
    <changeSet id="init-1" author="dev">
         <createTable tableName="recipe">
-            <column name="recipeId" type="VARCHAR(255)">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_recipeId"/>
+            <column name="recipeId" type="uuid">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_recipeId" unique="true"/>
             </column>
-            <column name="stateId" type="VARCHAR(255)"/>
+            <column name="stateId" type="uuid"/>
             <column name="title" type="VARCHAR(255)"/>
             <column name="description" type="VARCHAR(255)"/>
             <column name="preparationSteps" type="VARCHAR(255)"/>
@@ -24,10 +25,10 @@
    </changeSet>
    <changeSet id="init-2" author="dev">
         <createTable tableName="stat">
-            <column name="statId" type="VARCHAR(255)">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_statId"/>
+            <column name="statId" type="uuid">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_statId" unique="true"/>
             </column>
-            <column name="recipeId" type="VARCHAR(255)"/>
+            <column name="recipeId" type="uuid"/>
             <column name="views" type="INTEGER"/>
             <column name="createdAt" type="TIMESTAMP WITHOUT TIME ZONE"/>
             <column name="createdBy" type="VARCHAR(255)"/>
@@ -37,8 +38,8 @@
    </changeSet>
    <changeSet id="init-3" author="dev">
         <createTable tableName="article">
-            <column name="articleId" type="VARCHAR(255)">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_articleId"/>
+            <column name="articleId" type="uuid">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_articleId" unique="true"/>
             </column>
             <column name="articleName" type="VARCHAR(255)"/>
             <column name="description" type="VARCHAR(255)"/>
@@ -51,8 +52,8 @@
    </changeSet>
    <changeSet id="init-4" author="dev">
         <createTable tableName="unit">
-            <column name="unitId" type="VARCHAR(255)">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_unitId"/>
+            <column name="unitId" type="uuid">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_unitId" unique="true"/>
             </column>
             <column name="symbol" type="VARCHAR(255)"/>
             <column name="createdAt" type="TIMESTAMP WITHOUT TIME ZONE"/>
@@ -63,13 +64,13 @@
    </changeSet>
    <changeSet id="init-5" author="dev">
         <createTable tableName="ingredient">
-            <column name="ingredientId" type="VARCHAR(255)">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_ingredientId"/>
+            <column name="ingredientId" type="uuid">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_ingredientId" unique="true"/>
             </column>
-            <column name="recipeId" type="VARCHAR(255)"/>
-            <column name="articleId" type="VARCHAR(255)"/>
-            <column name="unitId" type="VARCHAR(255)"/>
-            <column name="quantity" type="INTEGER"/>
+            <column name="recipeId" type="uuid"/>
+            <column name="articleId" type="uuid"/>
+            <column name="unitId" type="uuid"/>
+            <column name="quantity" type="DECIMAL"/>
             <column name="createdAt" type="TIMESTAMP WITHOUT TIME ZONE"/>
             <column name="createdBy" type="VARCHAR(255)"/>
             <column name="modifiedAt" type="TIMESTAMP WITHOUT TIME ZONE"/>
@@ -78,8 +79,8 @@
     </changeSet>
     <changeSet id="init-6" author="dev">
         <createTable tableName="category">
-            <column name="categoryId" type="VARCHAR(255)">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_categoryId"/>
+            <column name="categoryId" type="uuid">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_categoryId" unique="true"/>
             </column>
             <column name="name" type="VARCHAR(255)"/>
             <column name="createdAt" type="TIMESTAMP WITHOUT TIME ZONE"/>
@@ -90,11 +91,11 @@
    </changeSet>
    <changeSet id="init-7" author="dev">
         <createTable tableName="category_recipe">
-            <column name="categoryRecipeId" type="VARCHAR(255)">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_categoryRecipeId"/>
+            <column name="categoryRecipeId" type="uuid">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_categoryRecipeId" unique="true"/>
             </column>
-            <column name="recipeId" type="VARCHAR(255)"/>
-            <column name="categoryId" type="VARCHAR(255)"/>
+            <column name="recipeId" type="uuid"/>
+            <column name="categoryId" type="uuid"/>
             <column name="createdAt" type="TIMESTAMP WITHOUT TIME ZONE"/>
             <column name="createdBy" type="VARCHAR(255)"/>
             <column name="modifiedAt" type="TIMESTAMP WITHOUT TIME ZONE"/>
@@ -103,11 +104,11 @@
    </changeSet>
    <changeSet id="init-8" author="dev">
         <createTable tableName="rating">
-            <column name="ratingId" type="VARCHAR(255)">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_ratingId"/>
+            <column name="ratingId" type="uuid">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_ratingId" unique="true"/>
             </column>
-            <column name="recipeId" type="VARCHAR(255)"/>
-            <column name="userId" type="VARCHAR(255)"/>
+            <column name="recipeId" type="uuid"/>
+            <column name="userId" type="uuid"/>
             <column name="rating" type="INTEGER"/>
             <column name="comment" type="VARCHAR(1024)"/>
             <column name="createdAt" type="TIMESTAMP WITHOUT TIME ZONE"/>
@@ -202,8 +203,8 @@
    </changeSet>
    <changeSet id="init-16" author="dev">
         <createTable tableName="state">
-            <column name="stateId" type="VARCHAR(255)">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_stateId"/>
+            <column name="stateId" type="uuid">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_stateId" unique="true"/>
             </column>
             <column name="name" type="VARCHAR(255)"/>
         </createTable>
