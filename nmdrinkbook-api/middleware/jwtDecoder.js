@@ -5,7 +5,12 @@ var jwtDecoder = function (req, res, next) {
     if (authHeader) {
         var token = authHeader.substring(7, authHeader.length)
         var decoded = jwt_decode(token)
-        console.log('Username from JWT token: ', decoded['preferred_username'])
+        if (req.method === 'POST') {
+            req.createdBy = decoded['preferred_username']
+            req.modifiedBy = decoded['preferred_username']
+        } else if (req.method === 'PUT') {
+            req.modifiedBy = decoded['preferred_username']
+        }
     }
     next()
 }

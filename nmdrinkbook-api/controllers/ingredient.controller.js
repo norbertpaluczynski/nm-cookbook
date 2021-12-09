@@ -14,8 +14,8 @@ export const ingredientController = () => {
             articleId: req.body.description,
             unitId: req.body.preparationSteps,
             quantity: req.body.preparationTime,
-            createdBy: req.body.createdBy,
-            modifiedBy: req.body.modifiedBy
+            createdBy: req.createdBy,
+            modifiedBy: req.modifiedBy
         }
     
         Ingredient.create(ingredient)
@@ -31,6 +31,7 @@ export const ingredientController = () => {
 
     const save = (req ,res) => {
         const id = req.params.id
+        req.body.modifiedBy = req.modifiedBy
 
         Ingredient.update(req.body, {
             where: { ingredientId: id }

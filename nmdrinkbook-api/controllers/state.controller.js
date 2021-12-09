@@ -11,8 +11,8 @@ export const stateController = () => {
     
         const state = {
             name: req.body.name,
-            createdBy: req.body.createdBy,
-            modifiedBy: req.body.modifiedBy
+            createdBy: req.createdBy,
+            modifiedBy: req.modifiedBy
         }
     
         State.create(state)
@@ -28,6 +28,7 @@ export const stateController = () => {
 
     const save = (req ,res) => {
         const id = req.params.id
+        req.body.modifiedBy = req.modifiedBy
 
         State.update(req.body, {
             where: { stateId: id }

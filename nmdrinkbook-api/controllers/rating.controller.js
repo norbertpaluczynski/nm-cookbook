@@ -14,8 +14,8 @@ export const ratingController = () => {
             userId: req.body.userId,
             rating: req.body.rating,
             comment: req.body.comment,
-            createdBy: req.body.createdBy,
-            modifiedBy: req.body.modifiedBy
+            createdBy: req.createdBy,
+            modifiedBy: req.modifiedBy
         }
     
         Rating.create(rating)
@@ -31,6 +31,7 @@ export const ratingController = () => {
 
     const save = (req ,res) => {
         const id = req.params.id
+        req.body.modifiedBy = req.modifiedBy
 
         Rating.update(req.body, {
             where: { ratingId: id }

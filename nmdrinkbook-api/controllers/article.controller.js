@@ -13,8 +13,8 @@ export const articleController = () => {
             articleName: req.body.articleName,
             description: req.body.description,
             alcoholVolume: req.body.alcoholVolume,
-            createdBy: req.body.createdBy,
-            modifiedBy: req.body.modifiedBy
+            createdBy: req.createdBy,
+            modifiedBy: req.modifiedBy
         }
     
         Article.create(article)
@@ -30,6 +30,7 @@ export const articleController = () => {
 
     const save = (req ,res) => {
         const id = req.params.id
+        req.body.modifiedBy = req.modifiedBy
 
         Article.update(req.body, {
             where: { articleId: id }
