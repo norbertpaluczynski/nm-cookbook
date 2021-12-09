@@ -17,8 +17,8 @@ export const recipeController = () => {
             preparationTime: req.body.preparationTime,
             difficultyLevel: req.body.difficultyLevel,
             image: req.body.image,
-            createdBy: req.body.createdBy,
-            modifiedBy: req.body.modifiedBy
+            createdBy: req.createdBy,
+            modifiedBy: req.modifiedBy
         }
     
         Recipe.create(recipe)
@@ -34,7 +34,8 @@ export const recipeController = () => {
 
     const createEmpty = (req, res) => {
         const recipe = {
-            createdBy: "admin"
+            createdBy: req.modifiedBy,
+            modifiedBy: req.modifiedBy
         }
     
         Recipe.create(recipe)
@@ -50,6 +51,7 @@ export const recipeController = () => {
 
     const save = (req ,res) => {
         const id = req.params.id
+        req.body.modifiedBy = req.modifiedBy
 
         Recipe.update(req.body, {
             where: { recipeId: id }

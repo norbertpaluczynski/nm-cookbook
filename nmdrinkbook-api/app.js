@@ -5,12 +5,14 @@ import { PORT, liquibaseConfig, swaggerOptions } from './config.js'
 import recipesRouter from './routes/recipe.router.js'
 import ingredientRouter from './routes/ingredient.router.js'
 import { readFile } from 'fs/promises'
+import jwtDecoder from './middleware/jwtDecoder.js'
 
 const instTs = new Liquibase(liquibaseConfig);
 instTs.update();
 
 const app = express()
 
+app.use(jwtDecoder)
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
@@ -21,6 +23,7 @@ app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerJson));
 
 app.use("/recipe", recipesRouter)
 app.use("/ingredient", ingredientRouter)
+
 
 app.listen(PORT, () => {
   console.log(`App listening at http://localhost:${PORT}`)

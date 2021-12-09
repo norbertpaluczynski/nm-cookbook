@@ -1,4 +1,5 @@
 import { POSTGRESQL_DEFAULT_CONFIG } from 'node-liquibase'
+import { Sequelize } from 'sequelize'
 
 export const PORT = process.env.PORT || 8000
 
@@ -9,6 +10,8 @@ export const liquibaseConfig = {
     username: 'nmdrinkbook',
     password: 'nmdrinkbook',
 }
+
+export const sequelize = new Sequelize('postgres://nmdrinkbook:nmdrinkbook@localhost:5432/nmdrinkbook')
 
 export const swaggerOptions = {
 	definition: {

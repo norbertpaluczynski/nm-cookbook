@@ -11,8 +11,8 @@ export const unitController = () => {
     
         const unit = {
             name: req.body.name,
-            createdBy: req.body.createdBy,
-            modifiedBy: req.body.modifiedBy
+            createdBy: req.createdBy,
+            modifiedBy: req.modifiedBy
         }
     
         Unit.create(unit)
@@ -28,6 +28,7 @@ export const unitController = () => {
 
     const save = (req ,res) => {
         const id = req.params.id
+        req.body.modifiedBy = req.modifiedBy
 
         Unit.update(req.body, {
             where: { unitId: id }
