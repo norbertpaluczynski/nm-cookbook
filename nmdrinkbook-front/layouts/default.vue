@@ -22,7 +22,7 @@
       </v-container>
     </v-main>
     <v-footer
-      absolute app
+      app fixed
       class="d-flex justify-space-between"
     >
       <span>&copy; {{ new Date().getFullYear() }}</span>
