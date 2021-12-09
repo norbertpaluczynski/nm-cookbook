@@ -11,8 +11,8 @@ export const categoryController = () => {
     
         const category = {
             name: req.body.name,
-            createdBy: req.body.createdBy,
-            modifiedBy: req.body.modifiedBy
+            createdBy: req.createdBy,
+            modifiedBy: req.modifiedBy
         }
     
         Category.create(category)
@@ -28,6 +28,7 @@ export const categoryController = () => {
 
     const save = (req ,res) => {
         const id = req.params.id
+        req.body.modifiedBy = req.modifiedBy
 
         Category.update(req.body, {
             where: { categoryId: id }
