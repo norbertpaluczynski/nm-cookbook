@@ -32,3 +32,10 @@ export interface RecipeDetails {
   views: number
   rating: number
 }
+
+export interface PagedList<T> {
+  rows: T[]
+  count: number
+  pageSize: number
+  pageNumber: number
+}

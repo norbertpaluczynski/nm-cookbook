@@ -29,7 +29,7 @@ export default Vue.extend({
     onMounted(() => {
       getRecipeRows(undefined)
       .then(response => {
-        rows.value = response
+        rows.value = response.rows
       })
     })
 

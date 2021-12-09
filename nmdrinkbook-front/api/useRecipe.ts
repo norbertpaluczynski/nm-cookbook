@@ -1,16 +1,21 @@
 import { useContext } from "@nuxtjs/composition-api"
 import { RecipeFilter } from "~/types/filters"
 import { Recipe } from "~/types/models"
-import { RecipeDetails, RecipeRow } from "~/types/queries"
+import { PagedList, RecipeDetails, RecipeRow } from "~/types/queries"
 
 export const useRecipe = () => {
   const { $axios } = useContext()
 
-  const getRecipeRows = async (filter?: RecipeFilter): Promise<RecipeRow[]> => {
-    let rows: RecipeRow[] = []
+  const getRecipeRows = async (filter?: RecipeFilter): Promise<PagedList<RecipeRow>> => {
+    var data: PagedList<RecipeRow> = {
+      rows: [],
+      count: 100,
+      pageNumber: 0,
+      pageSize: 10
+    }
 
     for (let i = 1; i < 10; i++) {
-      rows.push({
+      data.rows.push({
         image: 'https://mojedrinki.pl/wp-content/uploads/2021/02/mojito.jpg',
         categories: [
           { categoryId: '1', name: 'drinken1'},
@@ -26,9 +31,9 @@ export const useRecipe = () => {
         preparationTime: Math.floor(Math.random() * 10 + 5)
       })
     }
-    return rows
+    return data
 
-    const response = await $axios.post<RecipeRow[]>('/recipes/list', filter)
+    const response = await $axios.post<PagedList<RecipeRow>>('/recipes/list', filter)
     return response.data
   }
 
