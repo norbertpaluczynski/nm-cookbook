@@ -26,10 +26,10 @@
             </template>
           </v-card-subtitle>
           <div class="d-flex align-center px-4">
-            <TextIcon icon='mdi-eye-outline' :text="row.views" />
-            <TextIcon icon='mdi-finance' :text="row.difficultyLevel" />
-            <TextIcon icon='mdi-clock-outline' :text="row.preparationTime" />
-            <TextIcon icon='mdi-star' :text="row.rating" />
+            <TextIcon icon='mdi-eye-outline' :text="`${row.views}`" :tooltip="$t('tooltips.views')"/>
+            <TextIcon icon='mdi-finance' :text="`${row.difficultyLevel}`"  :tooltip="$t('tooltips.difficultyLevel')"/>
+            <TextIcon icon='mdi-clock-outline' :text="`${row.preparationTime}`"  :tooltip="$t('tooltips.preparationTime')"/>
+            <TextIcon icon='mdi-star' :text="`${row.rating}`" :tooltip="$t('tooltips.rating')"/>
           </div>
           <v-card-text class="text-justify">{{ row.description }}</v-card-text>
         </v-col>

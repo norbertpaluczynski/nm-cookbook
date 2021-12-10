@@ -7,7 +7,11 @@
     "username": "Nazwa użytkownika",
     "password": "Hasło",
     "email": "Email",
-    "repeatPassword": "Powtórz hasło"
+    "repeatPassword": "Powtórz hasło",
+    "name": "Nazwa",
+    "rating": "Ocena",
+    "difficultyLevel": "Trudność przygotowania",
+    "preparationTime": "Czas przygotowania"
   },
   "input-errors": {
     "required": "Pole wymagane",
@@ -18,5 +22,11 @@
   "headers": {
     "login": "Logowanie",
     "register": "Rejestracja"
+  },
+  "tooltips": {
+    "rating": "Ocena",
+    "difficultyLevel": "Stopień trudności przygotowania",
+    "preparationTime": "Czas przygotowania [min]",
+    "views": "Ilość wyświetleń"
   }
 }
