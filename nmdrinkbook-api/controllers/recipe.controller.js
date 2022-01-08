@@ -1,6 +1,21 @@
 import Recipe from '../models/recipe.model.js'
+import { Sequelize } from 'sequelize'
 
 export const recipeController = () => {
+    const findById = (req, res) => {
+        const id = req.params.id
+
+        Recipe.findOne({ where: {recipeId: id} })
+            .then(data => {
+                res.send(data)
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message: err.message || "Unknown error."
+                })
+            });
+    }
+
     const create = (req, res) => {
         // if (!req.body.title) {
         //     res.status(400).send({
@@ -94,7 +109,7 @@ export const recipeController = () => {
           });
     }
 
-    return { create, createEmpty, save, remove }
+    return { findById, create, createEmpty, save, remove }
 }
 
 export default recipeController
