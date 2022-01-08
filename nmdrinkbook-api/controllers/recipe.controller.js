@@ -1,33 +1,20 @@
 import Recipe from '../models/recipe.model.js'
+import { Sequelize } from 'sequelize'
 
 export const recipeController = () => {
-    const findAllPaged = (req, res) => {
-        let pageNumber = req.body.pageNumber
-        let pageSize = req.body.pageSize
-        let title = req.body.filter.title
-        let preparationTimeFrom = req.body.filter.preparationTimeFrom
-        let preparationTimeTo = req.body.filter.preparationTimeTo
-        let difficultyLevelFrom = req.body.filter.difficultyLevelFrom
-        let difficultyLevelTo = req.body.filter.difficultyLevelTo
-        let ratingFrom = req.body.filter.ratingFrom
-        let ratingTo = req.body.filter.ratingTo
-        let categoryIds = req.body.filter.categoryIds
-        let options = { where: {} }
+    const findById = (req, res) => {
+        const id = req.params.id
 
-        if (title) options.where.title = { [Op.eq]: title }
-
-        const { count, rows } = await Recipe.findAndCountAll({
-            options,
-            offset: pageSize * (pageNumber - 1),
-            limit: pageSize,
-            order: [
-                [req.body.orderBy, req.body.isAscending ? 'ASC' : 'DESC']
-            ]
-        })
-
-        // then return count (number of all objects matched by filter), pageSize, pageNumber (if it will be lower than requested)
+        Recipe.findOne({ where: {recipeId: id} })
+            .then(data => {
+                res.send(data)
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message: err.message || "Unknown error."
+                })
+            });
     }
-    
 
     const create = (req, res) => {
         // if (!req.body.title) {
@@ -122,7 +109,7 @@ export const recipeController = () => {
           });
     }
 
-    return { create, createEmpty, save, remove }
+    return { findById, create, createEmpty, save, remove }
 }
 
 export default recipeController
