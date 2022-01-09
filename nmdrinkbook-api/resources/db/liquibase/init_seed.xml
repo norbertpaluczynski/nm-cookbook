@@ -9,11 +9,11 @@
             endDelimiter="end"
             splitStatements="true"
             stripComments="false">
-            INSERT INTO state("stateId", name, "createdAt", "createdBy", "modifiedAt", "modifiedBy") VALUES
-            ('9bbd8eec-08c8-432d-a0a8-1dda1d21f89b', 'Nowy', NOW(), 'admin', NOW(), 'admin'),
-            ('68cf9858-b9b9-4b60-bd69-7e1fd9cdb39a', 'Prywatny', NOW(), 'admin', NOW(), 'admin'),
-            ('3252b299-5308-4cb1-98c2-6cba843b6f11', 'Publiczny', NOW(), 'admin', NOW(), 'admin'),
-            ('dd1e8fc1-8695-4956-9cf9-662e772881ed', 'Zatwierdzony', NOW(), 'admin', NOW(), 'admin')
+            INSERT INTO state("stateId", name) VALUES
+            ('9bbd8eec-08c8-432d-a0a8-1dda1d21f89b', 'Nowy'),
+            ('68cf9858-b9b9-4b60-bd69-7e1fd9cdb39a', 'Prywatny'),
+            ('3252b299-5308-4cb1-98c2-6cba843b6f11', 'Publiczny'),
+            ('dd1e8fc1-8695-4956-9cf9-662e772881ed', 'Zatwierdzony')
         </sql>
     </changeSet>
     <changeSet id="init-unit" author="dev">
