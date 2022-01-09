@@ -11,12 +11,12 @@
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_recipeId" unique="true"/>
             </column>
             <column name="stateId" type="uuid"/>
-            <column name="title" type="VARCHAR(MAX)"/>
-            <column name="description" type="VARCHAR(MAX)"/>
-            <column name="preparationSteps" type="VARCHAR(MAX)"/>
+            <column name="title" type="VARCHAR(512)"/>
+            <column name="description" type="TEXT"/>
+            <column name="preparationSteps" type="TEXT"/>
             <column name="preparationTime" type="INTEGER"/>
             <column name="difficultyLevel" type="INTEGER"/>
-            <column name="image" type="VARCHAR(MAX)"/>
+            <column name="image" type="TEXT"/>
             <column name="createdAt" type="TIMESTAMP WITHOUT TIME ZONE"/>
             <column name="createdBy" type="VARCHAR(255)"/>
             <column name="modifiedAt" type="TIMESTAMP WITHOUT TIME ZONE"/>
@@ -42,7 +42,7 @@
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_articleId" unique="true"/>
             </column>
             <column name="articleName" type="VARCHAR(255)"/>
-            <column name="description" type="VARCHAR(MAX)"/>
+            <column name="description" type="TEXT"/>
             <column name="alcoholVolume" type="DECIMAL"/>
             <column name="createdAt" type="TIMESTAMP WITHOUT TIME ZONE"/>
             <column name="createdBy" type="VARCHAR(255)"/>
