@@ -27,6 +27,7 @@
             R."title",
             R."description",
             R."preparationTime",
+            R."image",
             R."difficultyLevel",
             S."views",
             (SELECT AVG(rating) FROM rating WHERE "recipeId" = R."recipeId") rating,

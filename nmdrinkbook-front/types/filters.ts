@@ -3,7 +3,7 @@ export interface PagedRecipeFilter {
   pageNumber: number
   pageSize: number
   orderBy: string
-  isAscending: string
+  isAscending: boolean
 }
 
 export interface RecipeFilter {

@@ -8,6 +8,6 @@ router.get("/", (req, res) => {
     res.send("[]")
 })
 
-router.get("/findAllPaged", findAllPaged)
+router.post("/findAllPaged", findAllPaged)
 
 export default router

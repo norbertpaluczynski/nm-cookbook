@@ -14,7 +14,9 @@ export interface RecipeRow {
 
 export interface IngredientRow {
   ingredientId?: string
-  article: Article
+  articleName: string
+  description: string
+  alcoholVolume: number
   unit: Unit
   quantity: number
 }

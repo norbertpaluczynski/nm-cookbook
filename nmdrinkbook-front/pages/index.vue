@@ -131,7 +131,7 @@
 import { onMounted, ref, Ref, useContext } from '@nuxtjs/composition-api'
 import Vue from 'vue'
 import useRecipe from '~/api/useRecipe'
-import { RecipeFilter } from '~/types/filters'
+import { PagedRecipeFilter, RecipeFilter } from '~/types/filters'
 import { DictionaryRow } from '~/types/common'
 import { RecipeRow } from '~/types/queries'
 import useDictionary from '~/api/useDictionary'
@@ -158,10 +158,7 @@ export default Vue.extend({
     const isAscending: Ref<boolean> = ref(true)
 
     onMounted(() => {
-      getRecipeRows(undefined)
-      .then(response => {
-        rows.value = response.rows
-      })
+      getData()
       getCategories()
       .then(response => {
         categories.value = response
@@ -169,19 +166,30 @@ export default Vue.extend({
     })
 
     const getData = () => {
-      const filter: RecipeFilter = {
-        title: title.value,
-        preparationTimeFrom: preparationTime.value[0],
-        preparationTimeTo: preparationTime.value[1],
-        difficultyLevelFrom: difficultyLevel.value[0],
-        difficultyLevelTo: difficultyLevel.value[1],
-        ratingFrom: rating.value[0],
-        ratingTo: rating.value[1],
-        categoryIds: categoryIds.value
+      const filter: PagedRecipeFilter = {
+        filter: {
+          title: title.value,
+          preparationTimeFrom: preparationTime.value[0],
+          preparationTimeTo: preparationTime.value[1],
+          difficultyLevelFrom: difficultyLevel.value[0],
+          difficultyLevelTo: difficultyLevel.value[1],
+          ratingFrom: rating.value[0],
+          ratingTo: rating.value[1],
+          categoryIds: categoryIds.value
+        },
+        pageNumber: 1,
+        pageSize: 10,
+        orderBy: 'title',
+        isAscending: true
       }
+      getRecipeRows(filter)
+      .then(response => {
+        rows.value = response.rows
+      })
     }
 
     return {
+      title,
       rows,
       pageNumber,
       preparationTime,

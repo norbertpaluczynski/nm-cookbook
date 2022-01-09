@@ -16,6 +16,7 @@ import recipeCategoriesRouter from './routes/recipecategories.router.js'
 import recipeDetailsRouter from './routes/recipedetails.router.js'
 import { readFile } from 'fs/promises'
 import jwtDecoder from './middleware/jwtDecoder.js'
+import cors from 'cors'
 
 const instTs = new Liquibase(liquibaseConfig);
 instTs.update();
@@ -25,6 +26,8 @@ const app = express()
 app.use(jwtDecoder)
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+
+app.use(cors())
 
 const swaggerJson = JSON.parse(
   await readFile(new URL('./swagger.json', import.meta.url))

@@ -16,6 +16,9 @@ RecipeList.init({
     description: {
         type: DataTypes.STRING
     },
+    image: {
+        type: DataTypes.STRING
+    },
     preparationTime: {
         type: DataTypes.INTEGER
     },
