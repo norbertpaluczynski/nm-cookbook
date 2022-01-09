@@ -1,8 +1,8 @@
 import { Router } from 'express'
-import articleController from '../controllers/article.controller.js'
+import stateController from '../controllers/state.controller.js'
 
 const router = Router()
-const { create, save, remove, findById, findAll } = articleController()
+const { create, save, remove, findById, findAll } = stateController()
 
 router.get("/", (req, res) => {
     res.send("[]")

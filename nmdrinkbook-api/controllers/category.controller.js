@@ -71,7 +71,33 @@ export const categoryController = () => {
           });
     }
 
-    return { create, save, remove }
+    const findById = (req, res) => {
+        const id = req.params.id
+
+        Category.findByPk(id)
+            .then(data => {
+                res.send(data)
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message: err.message || "Unknown error."
+                })
+            });
+    }
+
+    const findAll = (req, res) => {
+        Category.findAll()
+            .then(data => {
+                res.send(data)
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message: err.message || "Unknown error."
+                })
+            });
+    }
+
+    return { create, save, remove, findById, findAll }
 }
 
 export default categoryController

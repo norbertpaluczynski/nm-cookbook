@@ -32,7 +32,12 @@ export const recipeListController = () => {
         if (title) where.title = { [Op.eq]: title }
         if (preparationTimeFrom && preparationTimeTo) where.preparationTime = { [Op.between]: [preparationTimeFrom, preparationTimeTo] }
         if (difficultyLevelFrom && difficultyLevelTo) where.difficultyLevel = { [Op.between]: [difficultyLevelFrom, difficultyLevelTo] }
-        if (ratingFrom && ratingTo) where.rating = { [Op.between]: [ratingFrom, ratingTo] }
+        if (ratingFrom && ratingTo) where.rating = { 
+            [Op.or]: {
+                [Op.between]: [ratingFrom, ratingTo],
+                [Op.eq]: null
+            }
+        }
         if (categoryId) where.categories = { [Op.like]: `%${categoryId}%` }
         
 

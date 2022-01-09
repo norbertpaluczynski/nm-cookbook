@@ -2,12 +2,18 @@ import express from 'express'
 import { Liquibase } from 'node-liquibase'
 import swaggerUI from 'swagger-ui-express'
 import { PORT, liquibaseConfig, swaggerOptions } from './config.js'
-import recipesRouter from './routes/recipe.router.js'
+import recipeRouter from './routes/recipe.router.js'
 import recipeListRouter from './routes/recipelist.router.js'
 import ingredientRouter from './routes/ingredient.router.js'
+import articleRouter from './routes/article.router.js'
+import categoryRouter from './routes/category.router.js'
+import ratingRouter from './routes/rating.router.js'
+import stateRouter from './routes/state.router.js'
+import unitRouter from './routes/unit.router.js'
 import ingredientListRouter from './routes/ingredientlist.router.js'
 import recipeHeaderRouter from './routes/recipeheader.router.js'
 import recipeCategoriesRouter from './routes/recipecategories.router.js'
+import recipeDetailsRouter from './routes/recipedetails.router.js'
 import { readFile } from 'fs/promises'
 import jwtDecoder from './middleware/jwtDecoder.js'
 
@@ -25,31 +31,19 @@ const swaggerJson = JSON.parse(
 )
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerJson));
 
-app.use("/recipe", recipesRouter)
-app.use("/recipelist", recipeListRouter)
+app.use("/article", articleRouter)
+app.use("/category", categoryRouter)
 app.use("/ingredient", ingredientRouter)
+app.use("/rating", ratingRouter)
+app.use("/recipe", recipeRouter)
+app.use("/state", stateRouter)
+app.use("/unit", unitRouter)
+app.use("/recipelist", recipeListRouter)
 app.use("/ingredientlist", ingredientListRouter)
 app.use("/recipeheader", recipeHeaderRouter)
 app.use("/recipecategories", recipeCategoriesRouter)
-
+app.use("/recipedetails", recipeDetailsRouter)
 
 app.listen(PORT, () => {
   console.log(`App listening at http://localhost:${PORT}`)
 })
-
-
-
-
-// const recipe = Recipe.build({
-  // title: 'title',
-  // description: 'description',
-  // preparationSteps: 'preparationSteps',
-  // preparationTime: 5,
-  // difficultyLevel: 4,
-  // image: 'image'
-// })
-
-// console.log(recipe instanceof Recipe)
-// console.log(recipe)
-
-// await recipe.save().catch(error => console.log(error))

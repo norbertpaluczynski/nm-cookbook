@@ -2,19 +2,6 @@ import Recipe from '../models/recipe.model.js'
 import { Sequelize } from 'sequelize'
 
 export const recipeController = () => {
-    const findById = (req, res) => {
-        const id = req.params.id
-
-        Recipe.findOne({ where: {recipeId: id} })
-            .then(data => {
-                res.send(data)
-            })
-            .catch(err => {
-                res.status(500).send({
-                    message: err.message || "Unknown error."
-                })
-            });
-    }
 
     const create = (req, res) => {
         // if (!req.body.title) {
@@ -109,7 +96,33 @@ export const recipeController = () => {
           });
     }
 
-    return { findById, create, createEmpty, save, remove }
+    const findById = (req, res) => {
+        const id = req.params.id
+
+        Recipe.findByPk(id)
+            .then(data => {
+                res.send(data)
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message: err.message || "Unknown error."
+                })
+            });
+    }
+
+    const findAll = (req, res) => {
+        Recipe.findAll()
+            .then(data => {
+                res.send(data)
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message: err.message || "Unknown error."
+                })
+            });
+    }
+
+    return { create, createEmpty, save, remove, findById, findAll }
 }
 
 export default recipeController

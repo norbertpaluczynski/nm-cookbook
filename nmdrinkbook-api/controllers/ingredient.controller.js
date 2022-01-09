@@ -74,7 +74,33 @@ export const ingredientController = () => {
           });
     }
 
-    return { create, save, remove }
+    const findById = (req, res) => {
+        const id = req.params.id
+
+        Ingredient.findByPk(id)
+            .then(data => {
+                res.send(data)
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message: err.message || "Unknown error."
+                })
+            });
+    }
+
+    const findAll = (req, res) => {
+        Ingredient.findAll()
+            .then(data => {
+                res.send(data)
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message: err.message || "Unknown error."
+                })
+            });
+    }
+
+    return { create, save, remove, findById, findAll }
 }
 
 export default ingredientController
