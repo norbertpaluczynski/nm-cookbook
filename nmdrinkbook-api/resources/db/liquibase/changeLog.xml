@@ -7,4 +7,5 @@
    <include relativeToChangelogFile="true" file="init_db.xml"/>
    <include relativeToChangelogFile="true" file="init_seed.xml"/>
    <include relativeToChangelogFile="true" file="init_views.xml"/>
+   <include relativeToChangelogFile="true" file="init_recipe_seed.xml"/>
 </databaseChangeLog>
