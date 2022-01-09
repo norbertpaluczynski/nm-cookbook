@@ -14,7 +14,7 @@
                 "preparationTime", "difficultyLevel", image, 
                 "createdAt", "createdBy", "modifiedAt", "modifiedBy")
             VALUES ('92d6668b-df11-4956-a531-0fabc5704f21', '3252b299-5308-4cb1-98c2-6cba843b6f11', 'Drink Summer Night', 'To wyjątkowy drink, który z pewnością będzie kojarzył ci się z wakacjami, gorącymi wieczorami i wschodem słońca.', 'Przygotowanie tego drinka z pewnością nie sprawi ci problemów. Do wysokiej szklanki włóż kilka kostek lodu, następnie do naczynia wlej gin, likier lub syrop oraz sok pomarańczowy. Ostatni szlif to dodanie grenadyny. Gotowe! Możesz delektować się niesamowitym smakiem przygotowanego drinka.', 
-                '5', '2', "https://mojedrinki.pl/wp-content/uploads/2021/09/gin-z-sokiem-pomaranczowym.jpg",
+                '5', '2', 'https://mojedrinki.pl/wp-content/uploads/2021/09/gin-z-sokiem-pomaranczowym.jpg',
                 NOW(), 'admin', NOW(), 'admin');
 
             INSERT INTO public.stat(
