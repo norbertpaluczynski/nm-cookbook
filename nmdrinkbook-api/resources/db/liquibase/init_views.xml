@@ -1,0 +1,93 @@
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet id="views-1" author="dev">
+        <createView catalogName="cat"
+                replaceIfExists="true"
+                schemaName="public"
+                viewName="RecipeCategories">
+            SELECT
+            CR."recipeId",
+            C."categoryId",
+            C."name"
+            FROM public.category C
+            JOIN public.category_recipe CR ON CR."categoryId" = C."categoryId"
+        </createView>
+    </changeSet>
+    <changeSet id="views-2" author="dev">
+       <createView catalogName="cat"
+              replaceIfExists="true"
+              schemaName="public"
+              viewName="RecipeList">
+            SELECT
+            R."recipeId",
+            R."title",
+            R."description",
+            R."preparationTime",
+            R."difficultyLevel",
+            S."views",
+            (SELECT AVG(rating) FROM rating WHERE "recipeId" = R."recipeId") rating,
+            (SELECT json_agg(json_build_object('categoryId', "categoryId", 'name', "name"))
+            FROM public."RecipeCategories"
+            WHERE "recipeId"=R."recipeId")::text categories
+            FROM public.recipe AS R
+            JOIN public.stat AS S ON (S."recipeId" = R."recipeId")
+            GROUP BY R."recipeId",
+            R."title",
+            R."description",
+            R."preparationTime",
+            R."difficultyLevel",
+            S."views"
+       </createView> 
+    </changeSet>
+    <changeSet id="views-3" author="dev">
+      <createView catalogName="cat"
+            replaceIfExists="true"
+            schemaName="public"
+            viewName="IngredientList">
+            SELECT
+            I."recipeId",
+            I."ingredientId",
+            A."articleName",
+            A."description",
+            A."alcoholVolume",
+            U."symbol",
+            I."quantity"
+            FROM public.ingredient AS I
+            JOIN public.article A ON A."articleId" = I."articleId"
+            JOIN public.unit U ON U."unitId" = I."unitId"
+        </createView>
+    </changeSet>
+    <changeSet id="views-4" author="dev">
+        <createView catalogName="cat"
+                replaceIfExists="true"
+                schemaName="public"
+                viewName="RecipeHeader">
+            SELECT
+            R."recipeId",
+            R."title",
+            R."description",
+            R."preparationSteps",
+            R."preparationTime",
+            R."difficultyLevel",
+            R."image",
+            S."views",
+            (SELECT AVG(rating) FROM rating WHERE "recipeId" = R."recipeId") rating
+            FROM public.recipe AS R
+            JOIN public.category_recipe AS CR ON (R."recipeId" = CR."recipeId")
+            JOIN public.stat AS S ON (S."recipeId" = R."recipeId")
+            GROUP BY
+            R."recipeId",
+            R."title",
+            R."description",
+            R."preparationSteps",
+            R."preparationTime",
+            R."difficultyLevel",
+            R."image",
+            S."views"
+        </createView>
+    </changeSet>
+</databaseChangeLog>
