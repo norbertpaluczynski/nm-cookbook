@@ -10,10 +10,10 @@
             splitStatements="true"
             stripComments="false">
             INSERT INTO state("stateId", name) VALUES
-            (gen_random_uuid(), 'Nowy'),
-            (gen_random_uuid(), 'Prywatny'),
-            (gen_random_uuid(), 'Publiczny'),
-            (gen_random_uuid(), 'Zatwierdzony')
+            ('9bbd8eec-08c8-432d-a0a8-1dda1d21f89b', 'Nowy'),
+            ('68cf9858-b9b9-4b60-bd69-7e1fd9cdb39a', 'Prywatny'),
+            ('3252b299-5308-4cb1-98c2-6cba843b6f11', 'Publiczny'),
+            ('dd1e8fc1-8695-4956-9cf9-662e772881ed', 'Zatwierdzony')
         </sql>
     </changeSet>
     <changeSet id="init-unit" author="dev">
@@ -22,17 +22,17 @@
             splitStatements="true"
             stripComments="false">
             INSERT INTO unit("unitId", symbol) VALUES
-            (gen_random_uuid(), 'ml'),
-            (gen_random_uuid(), 'g'),
-            (gen_random_uuid(), 'szklanka'),
-            (gen_random_uuid(), 'szt'),
-            (gen_random_uuid(), 'łyżka'),
-            (gen_random_uuid(), 'łyżeczka'),
-            (gen_random_uuid(), 'kieliszek'),
-            (gen_random_uuid(), 'szczypta'),
-            (gen_random_uuid(), 'listek'),
-            (gen_random_uuid(), 'kostka'),
-            (gen_random_uuid(), 'plasterek')
+            ('569b643a-58c0-47a7-9d60-efe5c350d74f', 'ml'),
+            ('8f8a425e-849b-40ad-9284-b959782b85d3', 'g'),
+            ('3efa5b69-75d0-4ddf-b516-db05ff393a77', 'szklanka'),
+            ('1615ef4f-2ba5-4ca2-b3b2-eed4a85a3168', 'szt'),
+            ('a2507484-9e0d-41bf-85e0-7ee10971f3f5', 'łyżka'),
+            ('670c7386-5210-4839-a4f5-12b7a93d0a68', 'łyżeczka'),
+            ('5337f4d5-1e85-485b-8428-501b8e7baacd', 'kieliszek'),
+            ('dbe3feb6-64fb-47f1-8426-11cc2c0da837', 'szczypta'),
+            ('7ab85dac-b557-4e9a-a07f-39e48c2d4e24', 'listek'),
+            ('cf161927-b36f-4be1-a324-53dcab9c4312', 'kostka'),
+            ('56afdc3e-5cdc-43bd-967a-1f1662f452c4', 'plasterek')
         </sql>
     </changeSet>
     <changeSet id="init-category" author="dev">
@@ -41,13 +41,13 @@
             splitStatements="true"
             stripComments="false">
             INSERT INTO category("categoryId", name) VALUES
-            (gen_random_uuid(), 'Bezalkoholowe'),
-            (gen_random_uuid(), 'Shoty'),
-            (gen_random_uuid(), 'Gorące'),
-            (gen_random_uuid(), 'Zimne'),
-            (gen_random_uuid(), 'Aperitif'),
-            (gen_random_uuid(), 'Short drink'),
-            (gen_random_uuid(), 'Long drink')
+            ('09067310-d330-4459-b7e9-5a0bb3db1c4a', 'Bezalkoholowe'),
+            ('13ef5c14-aa50-4a50-af52-1ded82fc2db5', 'Shoty'),
+            ('f9afdccd-ebff-41c1-a7a2-616c869177db', 'Gorące'),
+            ('8e868726-a629-48f5-80d8-baac43d25ed1', 'Zimne'),
+            ('5f2f69e9-723f-488c-87f0-851ba8c3f513', 'Aperitif'),
+            ('7eff915c-b718-465a-8d3e-49ee73dae9ca', 'Short drink'),
+            ('07f77278-c7a4-451b-848e-6ecdfcdfdaaf', 'Long drink')
         </sql>
     </changeSet>
     <changeSet id="init-article" author="dev">
@@ -56,30 +56,30 @@
             splitStatements="true"
             stripComments="false">
             INSERT INTO article("articleId", "articleName", description, "alcoholVolume") VALUES
-            (gen_random_uuid(), 'cukier biały', '', null),
-            (gen_random_uuid(), 'cukier trzcinowy', '', null),
-            (gen_random_uuid(), 'biała czysta wóda', '', 40),
-            (gen_random_uuid(), 'whisky', '', 40),
-            (gen_random_uuid(), 'lód', '', null),
-            (gen_random_uuid(), 'pepsi', '', null),
-            (gen_random_uuid(), 'cola', '', null),
-            (gen_random_uuid(), 'sok jabłkowy', '', null),
-            (gen_random_uuid(), 'sok pomarańczowy', '', null),
-            (gen_random_uuid(), 'limonka', '', null),
-            (gen_random_uuid(), 'cytryna', '', null),
-            (gen_random_uuid(), 'kawa', '', null),
-            (gen_random_uuid(), 'herbata', '', null),
-            (gen_random_uuid(), 'mleko', '', null),
-            (gen_random_uuid(), 'cynamon', '', null),
-            (gen_random_uuid(), 'gin', '', 35),
-            (gen_random_uuid(), 'piwo', '', 5),
-            (gen_random_uuid(), 'rum', '', null),
-            (gen_random_uuid(), 'białe wino', '', 12),
-            (gen_random_uuid(), 'czerwone wino', '', 12),
-            (gen_random_uuid(), 'tequilla', '', 40),
-            (gen_random_uuid(), 'Jägermeister', '', 35),
-            (gen_random_uuid(), 'napój enegetyczny', '', null),
-            (gen_random_uuid(), 'woda', '', null)
+            ('baf95262-e333-4d08-8275-bd67347c3d39', 'cukier biały', '', null),
+            ('cd553d20-6a58-4faf-bf20-27e65ad6ac0e', 'cukier trzcinowy', '', null),
+            ('17fa7edd-60e5-4b0a-af6c-e2e55e57533c', 'biała czysta wóda', '', 40),
+            ('1fe1a988-43d6-4705-bcf6-895973849d10', 'whisky', '', 40),
+            ('b2fbb623-0119-4f78-9d1d-9b9da3f02ed2', 'lód', '', null),
+            ('804fee0e-b121-4dee-b9bb-0c5012b1fd13', 'pepsi', '', null),
+            ('961e0c66-8a0f-428a-84ae-4914e98ce7f2', 'cola', '', null),
+            ('3023329b-369e-4ffc-a73b-dc40af623920', 'sok jabłkowy', '', null),
+            ('8337ffb6-3235-4dbd-a39f-88837366958e', 'sok pomarańczowy', '', null),
+            ('d00b46e2-0001-46dd-aa08-6074cdf6bf96', 'limonka', '', null),
+            ('fd84d3b0-fcf2-41b0-a544-5ec1e250e557', 'cytryna', '', null),
+            ('92f612ce-ef33-45bc-b1f4-fefd5d726038', 'kawa', '', null),
+            ('2c7dc0b1-9273-48ec-8dc5-5795efe6eb30', 'herbata', '', null),
+            ('7c436536-1e7d-485b-99e0-f2ddde657397', 'mleko', '', null),
+            ('9061c209-8059-4b64-90f8-5f8ee51b621e', 'cynamon', '', null),
+            ('4c3c491c-a9bd-4152-9b1b-6963c8328b3f', 'gin', '', 35),
+            ('fc4d7495-c412-4bd5-bd71-7818c3fde2b1', 'piwo', '', 5),
+            ('ddc080a6-bfa9-4379-bf64-54269319a75c', 'rum', '', null),
+            ('08407dba-08a0-4584-95a3-0c9a0d7c6947', 'białe wino', '', 12),
+            ('7351845e-f9f0-4978-aa15-26fb39ad1cf1', 'czerwone wino', '', 12),
+            ('2a4e816d-d0c1-462e-8a1c-27da072da5fe', 'tequilla', '', 40),
+            ('d244a8fd-9fd0-4a83-bf04-76b809f753dd', 'Jägermeister', '', 35),
+            ('826ae0e6-cf1d-4294-9515-2418430efe20', 'napój enegetyczny', '', null),
+            ('5132354d-0195-4ce0-9a00-39a2e45eabed', 'woda', '', null)
         </sql>
     </changeSet>
 </databaseChangeLog>
