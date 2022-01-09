@@ -1,0 +1,63 @@
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet id="init-recipe" author="dev">
+        <sql dbms="postgresql"
+            endDelimiter="end"
+            splitStatements="true"
+            stripComments="false">
+            INSERT INTO public.recipe(
+                "recipeId", "stateId", title, description, "preparationSteps", 
+                "preparationTime", "difficultyLevel", image, 
+                "createdAt", "createdBy", "modifiedAt", "modifiedBy")
+            VALUES ('92d6668b-df11-4956-a531-0fabc5704f21', '3252b299-5308-4cb1-98c2-6cba843b6f11', 'Drink Summer Night', 'To wyjątkowy drink, który z pewnością będzie kojarzył ci się z wakacjami, gorącymi wieczorami i wschodem słońca.', 'Przygotowanie tego drinka z pewnością nie sprawi ci problemów. Do wysokiej szklanki włóż kilka kostek lodu, następnie do naczynia wlej gin, likier lub syrop oraz sok pomarańczowy. Ostatni szlif to dodanie grenadyny. Gotowe! Możesz delektować się niesamowitym smakiem przygotowanego drinka.', 
+                '5', '2', "https://mojedrinki.pl/wp-content/uploads/2021/09/gin-z-sokiem-pomaranczowym.jpg",
+                NOW(), 'admin', NOW(), 'admin');
+
+            INSERT INTO public.stat(
+                "statId", "recipeId", "views",
+                "createdAt", "createdBy", "modifiedAt", "modifiedBy")
+            VALUES ('51cfad87-15a3-49bf-88a3-2bf0dee93d13', '92d6668b-df11-4956-a531-0fabc5704f21', 0,
+                NOW(), 'admin', NOW(), 'admin');
+
+            INSERT INTO public.ingredient(
+                "ingredientId", "recipeId", "articleId", "unitId", quantity, 
+                "createdAt", "createdBy", "modifiedAt", "modifiedBy")
+            VALUES ('ba3e8128-2231-44ad-9868-2b1c8b0ee7f4', '92d6668b-df11-4956-a531-0fabc5704f21', '4c3c491c-a9bd-4152-9b1b-6963c8328b3f', '569b643a-58c0-47a7-9d60-efe5c350d74f', 50, 
+                NOW(), 'admin', NOW(), 'admin');
+
+            INSERT INTO public.ingredient(
+                "ingredientId", "recipeId", "articleId", "unitId", quantity, 
+                "createdAt", "createdBy", "modifiedAt", "modifiedBy")
+            VALUES ('d4ac5d90-453c-42f1-9927-d7fcbeeb6e80', '92d6668b-df11-4956-a531-0fabc5704f21', '8337ffb6-3235-4dbd-a39f-88837366958e', '569b643a-58c0-47a7-9d60-efe5c350d74f', 150, 
+                NOW(), 'admin', NOW(), 'admin');
+
+            INSERT INTO public.ingredient(
+                "ingredientId", "recipeId", "articleId", "unitId", quantity, 
+                "createdAt", "createdBy", "modifiedAt", "modifiedBy")
+            VALUES ('2ad86b68-ef9b-4e8d-af37-9b396b4f9cac', '92d6668b-df11-4956-a531-0fabc5704f21', '4e3de945-a5f8-4e2e-85bc-9c58ba0e1dee', '569b643a-58c0-47a7-9d60-efe5c350d74f', 10, 
+                NOW(), 'admin', NOW(), 'admin');
+
+            INSERT INTO public.ingredient(
+                "ingredientId", "recipeId", "articleId", "unitId", quantity, 
+                "createdAt", "createdBy", "modifiedAt", "modifiedBy")
+            VALUES ('8782904f-b10e-4f00-8df2-caadcd3ac87e', '92d6668b-df11-4956-a531-0fabc5704f21', 'df6b027a-09e6-46eb-a88a-2cc0e7bd2835', '569b643a-58c0-47a7-9d60-efe5c350d74f', 20, 
+                NOW(), 'admin', NOW(), 'admin');
+
+            INSERT INTO public.ingredient(
+                "ingredientId", "recipeId", "articleId", "unitId", quantity, 
+                "createdAt", "createdBy", "modifiedAt", "modifiedBy")
+            VALUES ('477d1f74-09d6-4ad3-bc05-ff60167cb405', '92d6668b-df11-4956-a531-0fabc5704f21', 'b2fbb623-0119-4f78-9d1d-9b9da3f02ed2', 'cf161927-b36f-4be1-a324-53dcab9c4312', 5, 
+                NOW(), 'admin', NOW(), 'admin');
+
+            INSERT INTO public.category_recipe(
+                "categoryRecipeId", "recipeId", "categoryId",
+                "createdAt", "createdBy", "modifiedAt", "modifiedBy")
+            VALUES ('b51fa4ff-cfd5-4b77-a30f-84d601df6c7e', '92d6668b-df11-4956-a531-0fabc5704f21', '07f77278-c7a4-451b-848e-6ecdfcdfdaaf',
+                NOW(), 'admin', NOW(), 'admin');
+        </sql>
+    </changeSet>
+</databaseChangeLog>
