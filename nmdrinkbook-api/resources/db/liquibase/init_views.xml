@@ -30,6 +30,7 @@
             R."image",
             R."difficultyLevel",
             S."views",
+            R."createdBy"
             (SELECT AVG(rating) FROM rating WHERE "recipeId" = R."recipeId") rating,
             (SELECT json_agg(json_build_object('categoryId', "categoryId", 'name', "name"))
             FROM public."RecipeCategories"

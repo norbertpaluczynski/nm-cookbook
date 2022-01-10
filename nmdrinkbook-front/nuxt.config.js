@@ -66,7 +66,8 @@ export default {
           authorization: 'http://localhost:28080/auth/realms/nmdrinkbook/protocol/openid-connect/auth',
           token: 'http://localhost:28080/auth/realms/nmdrinkbook/protocol/openid-connect/token',
           userInfo: 'http://localhost:28080/auth/realms/nmdrinkbook/protocol/openid-connect/userinfo',
-          logout: 'http://localhost:28080/auth/realms/nmdrinkbook/protocol/openid-connect/logout?redirect_uri=' + encodeURIComponent('https://localhost:3000')
+          user: 'http://localhost:28080/auth/realms/nmdrinkbook/protocol/openid-connect/userinfo',
+          logout: 'http://localhost:28080/auth/realms/nmdrinkbook/protocol/openid-connect/logout?redirect_uri=' + encodeURIComponent('http://localhost:3000')
         },
         token: {
           property: 'access_token',
@@ -82,7 +83,8 @@ export default {
         grantType: 'authorization_code',
         clientId: 'nmclient',
         scope: ['openid', 'profile', 'email'],
-        codeChallengeMethod: 'S256'
+        codeChallengeMethod: 'S256',
+        redirectUri: 'http://localhost:3000'
       }
     },
     redirect: false
@@ -90,7 +92,7 @@ export default {
 
 
   router: {
-    middleware: ['auth', 'loginRedirect']
+    middleware: ['auth']
   },
 
   // I18n module configuration: https://i18n.nuxtjs.org/setup

@@ -6,7 +6,23 @@
       fixed
       app
     >
-
+      <div class="d-flex flex-column justify-center align-center">
+        <v-btn width="180" rounded @click="login"
+          class="my-2" v-if="!$auth.loggedIn"
+        >
+          Login
+        </v-btn>
+        <v-btn width="180" rounded outlined @click="register"
+          class="my-2" v-if="!$auth.loggedIn"
+        >
+          Register
+        </v-btn>
+        <v-btn width="180" rounded @click="logout"
+          class="my-2" v-if="true || $auth.loggedIn"
+        >
+          Logout
+        </v-btn>
+      </div>
     </v-navigation-drawer>
     <v-app-bar
       :clipped-left="clipped"
@@ -45,7 +61,7 @@ import { ls } from '~/commons/constants'
 export default Vue.extend({
   name: 'default',
   setup() {
-    const { app } = useContext()
+    const { app, $auth, redirect } = useContext()
 
     const title = 'NMdrinkbook'
     const clipped: Ref<boolean> = ref(true)
@@ -65,11 +81,26 @@ export default Vue.extend({
       }
     })
 
+    const login = () => {
+      $auth.loginWith('keycloak')
+    }
+
+    const register = () => {
+      redirect('http://localhost:28080/auth/realms/nmdrinkbook/protocol/openid-connect/registrations?client_id=nmclient&response_type=code&scope=openid%20profile%20email&redirect_uri=http%3A%2F%2Flocalhost%3A3000&kc_locale=pl')
+    }
+
+    const logout = () => {
+      $auth.logout()
+    }
+
     return {
       title,
       clipped,
       drawer,
-      isDarkMode
+      isDarkMode,
+      login,
+      register,
+      logout
     }
   }
 })

@@ -158,7 +158,7 @@
           >
             <v-icon>mdi-chevron-left</v-icon>
           </v-btn>
-          <div class="mx-2">{{ currentPage }}</div>
+          <div class="mx-2 current-page">{{ currentPage }}</div>
           <v-btn
             :disabled="pageNumber * pageSize > totalCount"
             icon tile
@@ -208,7 +208,7 @@
           >
             <v-icon>mdi-chevron-left</v-icon>
           </v-btn>
-          <div class="mx-2">{{ currentPage }}</div>
+          <div class="mx-2 current-page">{{ currentPage }}</div>
           <v-btn
             :disabled="pageNumber * pageSize > totalCount"
             icon tile
@@ -296,7 +296,6 @@ export default Vue.extend({
         orderBy: orderBy.value,
         isAscending: isAscending.value
       }
-      console.log(filter.filter.categoryId)
       getRecipeRows(filter)
       .then(response => {
         rows.value = response.rows
@@ -364,5 +363,9 @@ export default Vue.extend({
 <style scoped>
 .select-width {
   max-width: 120px;
+}
+
+.current-page {
+  min-width: 60px;
 }
 </style>

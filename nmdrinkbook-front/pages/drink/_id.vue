@@ -82,7 +82,6 @@ export default Vue.extend({
         getRecipeDetails(recipeId.value)
         .then(response => {
           recipe.value = response
-          console.log(response)
         })
     }
 
