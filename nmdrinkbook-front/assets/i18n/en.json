@@ -7,7 +7,11 @@
     "username": "Username",
     "password": "Password",
     "email": "Email",
-    "repeatPassword": "Repeat password"
+    "repeatPassword": "Repeat password",
+    "name": "Name",
+    "rating": "Rating",
+    "difficultyLevel": "Difficulty level",
+    "preparationTime": "Preparation time"
   },
   "input-errors": {
     "required": "Required",
@@ -17,6 +21,14 @@
   },
   "headers": {
     "login": "Sign in",
-    "register": "Sign up"
+    "register": "Sign up",
+    "preparationSteps": "Preparation steps",
+    "ingredients": "Ingredients"
+  },
+  "tooltips": {
+    "rating": "Rating",
+    "difficultyLevel": "Difficulty level",
+    "preparationTime": "Preparation time",
+    "views": "Views"
   }
 }

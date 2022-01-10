@@ -21,7 +21,9 @@
   },
   "headers": {
     "login": "Logowanie",
-    "register": "Rejestracja"
+    "register": "Rejestracja",
+    "preparationSteps": "Sposób przygotowania",
+    "ingredients": "Składniki"
   },
   "tooltips": {
     "rating": "Ocena",
