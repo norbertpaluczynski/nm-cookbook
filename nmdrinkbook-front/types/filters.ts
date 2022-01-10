@@ -14,5 +14,5 @@ export interface RecipeFilter {
   difficultyLevelTo?: number
   ratingFrom?: number
   ratingTo?: number
-  categoryIds?: string[]
+  categoryId?: string
 }

@@ -11,7 +11,9 @@
     "name": "Nazwa",
     "rating": "Ocena",
     "difficultyLevel": "Trudność przygotowania",
-    "preparationTime": "Czas przygotowania"
+    "preparationTime": "Czas przygotowania",
+    "pageSize": "Ilość wierszy",
+    "orderBy": "Sortuj według"
   },
   "input-errors": {
     "required": "Pole wymagane",
@@ -30,5 +32,14 @@
     "difficultyLevel": "Stopień trudności przygotowania",
     "preparationTime": "Czas przygotowania [min]",
     "views": "Ilość wyświetleń"
+  },
+  "selects": {
+    "orderBy": {
+      "title": "Nazwa",
+      "views": "Popularność",
+      "rating": "Ocena",
+      "difficultyLevel": "Trudność przygotowania",
+      "preparationTime": "Czas przygotowania"
+    }
   }
 }

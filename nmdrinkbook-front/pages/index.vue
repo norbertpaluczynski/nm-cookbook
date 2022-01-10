@@ -68,12 +68,13 @@
                       <v-range-slider
                         v-model="preparationTime"
                         :min="1"
-                        :max="6"
+                        :max="30"
                         hide-details
                         color="accent"
                         ticks="always"
-                        tick-size="4"
-                        :tick-labels="[1,5,10,15,20,30]"
+                        tick-size="1"
+                        :thumb-label="true"
+                        :tick-labels="[1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,30]"
                       ></v-range-slider>
                     </div>
                   </template>
@@ -83,14 +84,14 @@
             </v-row>
             <v-row>
               <v-col cols="12" sm="6" md="8">
-                <v-chip-group v-model="categoryIds" multiple column>
+                <v-chip-group v-model="categoryId" column>
                   <template v-for="category in categories">
                     <v-chip
-                      :key="category.id"
+                      :key="category.categoryId"
                       small
                       outlined
                       filter
-                    >{{ category.value }}</v-chip>
+                    >{{ category.name }}</v-chip>
                   </template>
                 </v-chip-group>
               </v-col>
@@ -116,6 +117,64 @@
           </v-container>
         </v-card-text>
       </v-card>
+      <v-card class="my-6 pa-1">
+        <v-card-actions>
+          <v-select
+            :items="orderByItems"
+            v-model="orderBy"
+            outlined dense
+            hide-details
+            :label="$t('labels.orderBy')"
+            @change="getData"
+          ></v-select>
+          <v-btn icon tile class="ml-2" @click="changeSort">
+            <v-icon>
+              {{ isAscending
+              ? 'mdi-sort-alphabetical-ascending'
+              : 'mdi-sort-alphabetical-descending' }}
+            </v-icon>
+          </v-btn>
+          <v-spacer/>
+          <v-select
+            :items=[5,10,15,25,50]
+            v-model="pageSize"
+            outlined dense
+            hide-details
+            :label="$t('labels.pageSize')"
+            class="mr-6 select-width"
+            @change="getData"
+          ></v-select>
+          <v-btn
+            :disabled="pageNumber == 1"
+            icon tile
+            @click="goFirstPage"
+          >
+            <v-icon>mdi-page-first</v-icon>
+          </v-btn>
+          <v-btn
+            :disabled="pageNumber == 1"
+            icon tile
+            @click="goPreviousPage"
+          >
+            <v-icon>mdi-chevron-left</v-icon>
+          </v-btn>
+          <div class="mx-2">{{ currentPage }}</div>
+          <v-btn
+            :disabled="pageNumber * pageSize > totalCount"
+            icon tile
+            @click="goNextPage"
+          >
+            <v-icon>mdi-chevron-right</v-icon>
+          </v-btn>
+          <v-btn
+            :disabled="pageNumber * pageSize > totalCount"
+            icon tile
+            @click="goLastPage"
+          >
+            <v-icon>mdi-page-last</v-icon>
+          </v-btn>
+        </v-card-actions>
+      </v-card>
       <template v-for="(row, index) in rows">
         <RecipeCardRow
           :key="index"
@@ -123,39 +182,94 @@
           class="my-6"
         />
       </template>
+      <v-card class="pa-1">
+        <v-card-actions>
+          <v-spacer/>
+          <v-select
+            :items=[5,10,15,25,50]
+            v-model="pageSize"
+            outlined dense
+            hide-details
+            :label="$t('labels.pageSize')"
+            class="mr-6 select-width"
+            @change="getData"
+          ></v-select>
+          <v-btn
+            :disabled="pageNumber == 1"
+            icon tile
+            @click="goFirstPage"
+          >
+            <v-icon>mdi-page-first</v-icon>
+          </v-btn>
+          <v-btn
+            :disabled="pageNumber == 1"
+            icon tile
+            @click="goPreviousPage"
+          >
+            <v-icon>mdi-chevron-left</v-icon>
+          </v-btn>
+          <div class="mx-2">{{ currentPage }}</div>
+          <v-btn
+            :disabled="pageNumber * pageSize > totalCount"
+            icon tile
+            @click="goNextPage"
+          >
+            <v-icon>mdi-chevron-right</v-icon>
+          </v-btn>
+          <v-btn
+            :disabled="pageNumber * pageSize > totalCount"
+            icon tile
+            @click="goLastPage"
+          >
+            <v-icon>mdi-page-last</v-icon>
+          </v-btn>
+        </v-card-actions>
+      </v-card>
     </v-col>
   </v-row>
 </template>
 
 <script lang="ts">
-import { onMounted, ref, Ref, useContext } from '@nuxtjs/composition-api'
+import { computed, onMounted, ref, Ref, useContext } from '@nuxtjs/composition-api'
 import Vue from 'vue'
 import useRecipe from '~/api/useRecipe'
 import { PagedRecipeFilter, RecipeFilter } from '~/types/filters'
-import { DictionaryRow } from '~/types/common'
+import { Category } from '~/types/models'
 import { RecipeRow } from '~/types/queries'
-import useDictionary from '~/api/useDictionary'
+import useCategory from '~/api/useCategory'
 
 export default Vue.extend({
   auth: false,
   setup() {
-    const {} = useContext()
+    const { i18n } = useContext()
     const { getRecipeRows } = useRecipe()
-    const { getCategories } = useDictionary()
+    const { getCategories } = useCategory()
 
     const rows: Ref<RecipeRow[]> = ref([])
-    const categories: Ref<DictionaryRow[]> = ref([])
+    const categories: Ref<Category[]> = ref([])
 
     const title: Ref<string> = ref('')
     const preparationTime: Ref<number[]> = ref([1,60])
     const difficultyLevel: Ref<number[]> = ref([1,5])
     const rating: Ref<number[]> = ref([1,5])
-    const categoryIds: Ref<string[]> = ref([])
+    const categoryId: Ref<number> = ref(-1)
 
-    const pageNumber: Ref<number> = ref(0)
+    const pageNumber: Ref<number> = ref(1)
     const pageSize: Ref<number> = ref(10)
+    const totalCount: Ref<number> = ref(0)
     const orderBy: Ref<string> = ref('title')
     const isAscending: Ref<boolean> = ref(true)
+    const orderByItems = ref([
+      { value: 'title', text: i18n.tc('selects.orderBy.title') },
+      { value: 'views', text: i18n.tc('selects.orderBy.views') },
+      { value: 'rating', text: i18n.tc('selects.orderBy.rating') },
+      { value: 'difficultyLevel', text: i18n.tc('selects.orderBy.difficultyLevel') },
+      { value: 'preparationTime', text: i18n.tc('selects.orderBy.preparationTime') }
+    ])
+
+    const currentPage = computed(() => `${(pageNumber.value - 1) * pageSize.value + 1}
+     - ${pageNumber.value * pageSize.value > totalCount.value ? totalCount.value : pageNumber.value * pageSize.value}
+     / ${totalCount.value || '-'}`)
 
     onMounted(() => {
       getData()
@@ -175,17 +289,50 @@ export default Vue.extend({
           difficultyLevelTo: difficultyLevel.value[1],
           ratingFrom: rating.value[0],
           ratingTo: rating.value[1],
-          categoryIds: categoryIds.value
+          categoryId: categories.value[categoryId.value]?.categoryId
         },
-        pageNumber: 1,
-        pageSize: 10,
-        orderBy: 'title',
-        isAscending: true
+        pageNumber: pageNumber.value,
+        pageSize: pageSize.value,
+        orderBy: orderBy.value,
+        isAscending: isAscending.value
       }
+      console.log(filter.filter.categoryId)
       getRecipeRows(filter)
       .then(response => {
         rows.value = response.rows
+        totalCount.value = response.count
       })
+    }
+
+    const goFirstPage = () => {
+      pageNumber.value = 1
+      getData()
+    }
+
+    const goPreviousPage = () => {
+      if (pageSize.value > 1) {
+        pageNumber.value -= 1
+        getData()
+      }
+    }
+
+    const goNextPage = () => {
+      if (pageSize.value * pageNumber.value < totalCount.value) {
+        pageNumber.value += 1
+        getData()
+      }
+    }
+
+    const goLastPage = () => {
+      if (pageSize.value * pageNumber.value < totalCount.value) {
+        pageNumber.value = Math.floor(totalCount.value / pageSize.value) + 1
+        getData()
+      }
+    }
+
+    const changeSort = () => {
+      isAscending.value = !isAscending.value
+      getData()
     }
 
     return {
@@ -195,13 +342,27 @@ export default Vue.extend({
       preparationTime,
       difficultyLevel,
       rating,
+      totalCount,
       pageSize,
       orderBy,
       isAscending,
-      categoryIds,
+      categoryId,
       categories,
-      getData
+      currentPage,
+      orderByItems,
+      getData,
+      goFirstPage,
+      goPreviousPage,
+      goNextPage,
+      goLastPage,
+      changeSort
     }
   }
 })
 </script>
+
+<style scoped>
+.select-width {
+  max-width: 120px;
+}
+</style>

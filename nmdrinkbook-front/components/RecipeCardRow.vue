@@ -1,7 +1,6 @@
 <template>
   <v-card
     class="rounded-lg"
-    elevation="8"
   >
     <v-container>
       <v-row>

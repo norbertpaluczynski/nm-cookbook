@@ -11,7 +11,9 @@
     "name": "Name",
     "rating": "Rating",
     "difficultyLevel": "Difficulty level",
-    "preparationTime": "Preparation time"
+    "preparationTime": "Preparation time",
+    "pageSize": "Page size",
+    "orderBy": "Order by"
   },
   "input-errors": {
     "required": "Required",
@@ -30,5 +32,14 @@
     "difficultyLevel": "Difficulty level",
     "preparationTime": "Preparation time",
     "views": "Views"
+  },
+  "selects": {
+    "orderBy": {
+      "title": "Title",
+      "views": "Views",
+      "rating": "Rating",
+      "difficultyLevel": "Difficulty level",
+      "preparationTime": "Preparation time"
+    }
   }
 }
