@@ -45,8 +45,8 @@
   },
   "menuItems": {
     "drinkList": "Drinki",
-    "myDrinks": "Moje przepisy",
-    "addDrink": "Dodaj przepis",
+    "myRecipes": "Moje przepisy",
+    "addRecipe": "Dodaj przepis",
     "articles": "Artykuły",
     "units": "Jednostki",
     "categories": "Kategorie"
