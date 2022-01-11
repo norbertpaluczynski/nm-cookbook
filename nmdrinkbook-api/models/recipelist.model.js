@@ -33,6 +33,9 @@ RecipeList.init({
     },
     categories: {
         type: DataTypes.STRING
+    },
+    createdBy: {
+        type: DataTypes.STRING
     }
 }, {
     sequelize,
