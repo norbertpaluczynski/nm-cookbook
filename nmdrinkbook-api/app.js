@@ -10,6 +10,7 @@ import categoryRouter from './routes/category.router.js'
 import ratingRouter from './routes/rating.router.js'
 import stateRouter from './routes/state.router.js'
 import unitRouter from './routes/unit.router.js'
+import statRouter from './routes/stat.router.js'
 import ingredientListRouter from './routes/ingredientlist.router.js'
 import recipeHeaderRouter from './routes/recipeheader.router.js'
 import recipeCategoriesRouter from './routes/recipecategories.router.js'
@@ -41,6 +42,7 @@ app.use("/rating", ratingRouter)
 app.use("/recipe", recipeRouter)
 app.use("/state", stateRouter)
 app.use("/unit", unitRouter)
+app.use("/stat", statRouter)
 app.use("/recipelist", recipeListRouter)
 app.use("/ingredientlist", ingredientListRouter)
 app.use("/recipeheader", recipeHeaderRouter)

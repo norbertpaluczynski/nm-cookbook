@@ -100,6 +100,8 @@ export const ingredientController = () => {
             });
     }
 
+    //TODO get all for recipeId
+
     return { create, save, remove, findById, findAll }
 }
 

@@ -1,4 +1,5 @@
 import Recipe from '../models/recipe.model.js'
+import Stat from '../models/stat.model.js'
 import { Sequelize } from 'sequelize'
 
 export const recipeController = () => {
@@ -36,13 +37,20 @@ export const recipeController = () => {
 
     const createEmpty = (req, res) => {
         const recipe = {
+            stateId: '9bbd8eec-08c8-432d-a0a8-1dda1d21f89b',
             createdBy: req.modifiedBy,
             modifiedBy: req.modifiedBy
         }
     
         Recipe.create(recipe)
-            .then(data => {
+            .then(async data => {
                 res.send(data);
+                await Stat.create({
+                    recipeId: data.recipeId,
+                    views: 0,
+                    createdBy: req.createdBy,
+                    modifiedBy: req.modifiedBy
+                })
             })
             .catch(err => {
                 res.status(500).send({

@@ -1,24 +1,15 @@
-import Rating from '../models/rating.model.js'
+import Stat from '../models/stat.model.js'
 
-export const ratingController = () => {
+export const statController = () => {
     const create = (req, res) => {
-        // if (!req.body.quantity) {
-        //     res.status(400).send({
-        //       message: "Content can not be empty!"
-        //     });
-        //     return;
-        // }
     
-        const rating = {
+        const stat = {
             recipeId: req.body.recipeId,
-            userId: req.body.userId,
-            rating: req.body.rating,
-            comment: req.body.comment,
             createdBy: req.createdBy,
             modifiedBy: req.modifiedBy
         }
     
-        Rating.create(rating)
+        Stat.create(state)
             .then(data => {
                 res.send(data);
             })
@@ -33,8 +24,8 @@ export const ratingController = () => {
         const id = req.params.id
         req.body.modifiedBy = req.modifiedBy
 
-        Rating.update(req.body, {
-            where: { ratingId: id }
+        Stat.update(req.body, {
+            where: { statId: id }
         })
             .then(num => {
                 if (num == 1) {
@@ -55,8 +46,8 @@ export const ratingController = () => {
     const remove = (req, res) => {
         const id = req.params.id
 
-        Rating.destroy({
-            where: { ratingId: id }
+        Stat.destroy({
+            where: { statId: id }
         })
             .then(num => {
                 if (num == 1) {
@@ -77,7 +68,7 @@ export const ratingController = () => {
     const findById = (req, res) => {
         const id = req.params.id
 
-        Rating.findByPk(id)
+        Stat.findByPk(id)
             .then(data => {
                 res.send(data)
             })
@@ -89,7 +80,7 @@ export const ratingController = () => {
     }
 
     const findAll = (req, res) => {
-        Rating.findAll()
+        Stat.findAll()
             .then(data => {
                 res.send(data)
             })
@@ -100,9 +91,7 @@ export const ratingController = () => {
             });
     }
 
-    //TODO get all comments for recipe (not null and not empty strings)
-
     return { create, save, remove, findById, findAll }
 }
 
-export default ratingController
+export default statController
