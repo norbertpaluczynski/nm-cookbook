@@ -1,7 +1,8 @@
 {
   "buttons": {
     "login": "Zaloguj",
-    "register": "Zarejestruj"
+    "register": "Zarejestruj",
+    "logout": "Wyloguj"
   },
   "labels": {
     "username": "Nazwa użytkownika",
@@ -41,5 +42,13 @@
       "difficultyLevel": "Trudność przygotowania",
       "preparationTime": "Czas przygotowania"
     }
+  },
+  "menuItems": {
+    "drinkList": "Drinki",
+    "myDrinks": "Moje przepisy",
+    "addDrink": "Dodaj przepis",
+    "articles": "Artykuły",
+    "units": "Jednostki",
+    "categories": "Kategorie"
   }
 }
