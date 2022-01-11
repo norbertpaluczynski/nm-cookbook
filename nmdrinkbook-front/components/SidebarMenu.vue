@@ -25,7 +25,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { computed, onMounted, Ref, ref, useContext } from '@nuxtjs/composition-api'
+import { Ref, ref, useContext } from '@nuxtjs/composition-api'
 import { MenuItem, AccesType } from '~/types/common'
 
 export default Vue.extend({
@@ -41,14 +41,14 @@ export default Vue.extend({
         icon: 'mdi-glass-wine'
       },
       {
-        label: 'myDrinks',
-        path: '/mydrinks',
+        label: 'myRecipes',
+        path: '/myrecipes',
         accessType: AccesType.user,
         icon: 'mdi-text-box-multiple'
       },
       {
-        label: 'addDrink',
-        path: '/drink',
+        label: 'addRecipe',
+        path: '/myrecipes/new',
         accessType: AccesType.user,
         icon: 'mdi-text-box-plus'
       },
