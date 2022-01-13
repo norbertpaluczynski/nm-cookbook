@@ -15,7 +15,10 @@ export interface RecipeRow {
 }
 
 export interface IngredientRow {
-  ingredientId?: string
+  ingredientId: string
+  recipeId: string
+  articleId: string
+  unitId: string
   articleName: string
   description: string
   alcoholVolume: number

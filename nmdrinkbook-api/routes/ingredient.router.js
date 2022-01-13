@@ -18,6 +18,6 @@ router.get("/findById/:id", findById)
 
 router.get("/findAll", findAll)
 
-router.get("findAllByRecipeId/:id", findAllByRecipeId)
+router.get("/findAllByRecipeId/:id", findAllByRecipeId)
 
 export default router

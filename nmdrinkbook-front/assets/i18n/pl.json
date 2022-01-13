@@ -3,7 +3,8 @@
     "login": "Zaloguj",
     "register": "Zarejestruj",
     "logout": "Wyloguj",
-    "save": "Zapisz"
+    "save": "Zapisz",
+    "cancel": "Anuluj"
   },
   "labels": {
     "username": "Nazwa użytkownika",
@@ -20,7 +21,10 @@
     "preparationSteps": "Sposób przygotowania",
     "categories": "Kategorie",
     "link": "Link do grafiki",
-    "state": "Status"
+    "state": "Status",
+    "article": "Artykuł",
+    "unit": "Jednostka",
+    "quantity": "Ilość"
   },
   "input-errors": {
     "required": "Pole wymagane",
@@ -32,7 +36,8 @@
     "login": "Logowanie",
     "register": "Rejestracja",
     "preparationSteps": "Sposób przygotowania",
-    "ingredients": "Składniki"
+    "ingredients": "Składniki",
+    "newIngredient": "Nowy składnik"
   },
   "tooltips": {
     "rating": "Ocena",

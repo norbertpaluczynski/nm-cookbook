@@ -11,9 +11,9 @@ export const ingredientController = () => {
     
         const ingredient = {
             recipeId: req.body.recipeId,
-            articleId: req.body.description,
-            unitId: req.body.preparationSteps,
-            quantity: req.body.preparationTime,
+            articleId: req.body.articleId,
+            unitId: req.body.unitId,
+            quantity: req.body.quantity,
             createdBy: req.createdBy,
             modifiedBy: req.modifiedBy
         }
@@ -33,7 +33,12 @@ export const ingredientController = () => {
         const id = req.params.id
         req.body.modifiedBy = req.modifiedBy
 
-        Ingredient.update(req.body, {
+        Ingredient.update({
+            articleId: req.body.articleId,
+            unitId: req.body.unitId,
+            quantity: req.body.quantity,
+            modifiedBy: req.modifiedBy
+        }, {
             where: { ingredientId: id }
         })
             .then(num => {

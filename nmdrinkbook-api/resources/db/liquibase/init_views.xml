@@ -58,6 +58,8 @@
             SELECT
             I."recipeId",
             I."ingredientId",
+            I."articleId",
+            I."unitId",
             A."articleName",
             A."description",
             A."alcoholVolume",

@@ -88,7 +88,11 @@ export const articleController = () => {
     }
 
     const findAll = (req, res) => {
-        Article.findAll()
+        Article.findAll({
+            order: [
+                ['articleName', 'ASC']
+            ]
+        })
             .then(data => {
                 res.send(data)
             })

@@ -86,7 +86,11 @@ export const unitController = () => {
     }
 
     const findAll = (req, res) => {
-        Unit.findAll()
+        Unit.findAll({
+            order: [
+                ['symbol', 'ASC']
+            ]
+        })
             .then(data => {
                 res.send(data)
             })

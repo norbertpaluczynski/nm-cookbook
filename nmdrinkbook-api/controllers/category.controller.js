@@ -86,7 +86,11 @@ export const categoryController = () => {
     }
 
     const findAll = (req, res) => {
-        Category.findAll()
+        Category.findAll({
+            order: [
+                ['name', 'ASC']
+            ]
+        })
             .then(data => {
                 res.send(data)
             })

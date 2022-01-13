@@ -13,6 +13,12 @@ IngredientList.init({
     ingredientId: {
         type: DataTypes.UUID
     },
+    articleId: {
+        type: DataTypes.STRING
+    },
+    unitId: {
+        type: DataTypes.STRING
+    },
     articleName: {
         type: DataTypes.STRING
     },
