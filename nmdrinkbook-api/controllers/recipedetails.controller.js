@@ -18,6 +18,7 @@ export const  recipeDetailsController = () => {
                 })
                 res.send({
                     recipeId: data.recipeId,
+                    stateId: data.stateId,
                     title: data.title,
                     description: data.description,
                     preparationSteps: data.preparationSteps,
@@ -37,8 +38,37 @@ export const  recipeDetailsController = () => {
             });
     }
 
+    const findMyRecipeById = (req, res) => {
+        const id = req.params.id
 
-    return { findById }
+        RecipeHeader.findOne({ where: {recipeId: id} })
+            .then(async (data) => {
+                const categories = await RecipeCategories.findAll({ where: {recipeId: id} })
+                const ingredients = await IngredientList.findAll({ where: {recipeId: id} })
+                res.send({
+                    recipeId: data.recipeId,
+                    stateId: data.stateId,
+                    title: data.title,
+                    description: data.description,
+                    preparationSteps: data.preparationSteps,
+                    preparationTime: data.preparationTime,
+                    difficultyLevel: data.difficultyLevel,
+                    image: data.image,
+                    views: data.views,
+                    rating: data.rating,
+                    categories,
+                    ingredients
+                })
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message: err.message || "Unknown error."
+                })
+            });
+    }
+
+
+    return { findById, findMyRecipeById }
 }
 
 export default recipeDetailsController

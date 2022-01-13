@@ -13,6 +13,9 @@ RecipeHeader.init({
     title: {
         type: DataTypes.STRING
     },
+    stateId: {
+        type: DataTypes.STRING
+    },
     description: {
         type: DataTypes.STRING
     },

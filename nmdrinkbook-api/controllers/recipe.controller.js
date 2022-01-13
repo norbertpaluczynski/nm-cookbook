@@ -1,5 +1,6 @@
 import Recipe from '../models/recipe.model.js'
 import Stat from '../models/stat.model.js'
+import CategoryRecipe from '../models/categoryrecipe.model.js'
 import { Sequelize } from 'sequelize'
 
 export const recipeController = () => {
@@ -61,12 +62,43 @@ export const recipeController = () => {
 
     const save = (req ,res) => {
         const id = req.params.id
-        req.body.modifiedBy = req.modifiedBy
-
-        Recipe.update(req.body, {
+        
+        Recipe.update({
+            stateId: req.body.stateId,
+            title: req.body.title,
+            description: req.body.description,
+            preparationSteps: req.body.preparationSteps,
+            preparationTime: req.body.preparationTime,
+            difficultyLevel: req.body.difficultyLevel,
+            image: req.body.image,
+            modifiedBy: req.modifiedBy
+        }, {
             where: { recipeId: id }
         })
-            .then(num => {
+            .then(async num => {
+                const reqCategoryIds = req.body.categories.map(c => c.categoryId)
+                const dbCategories = await CategoryRecipe.findAll({ where: {
+                    recipeId: req.body.recipeId
+                }})
+
+
+                for (const catIndex in reqCategoryIds) {
+                    if (dbCategories.some(c => c.categoryId == reqCategoryIds[catIndex])) continue;
+                    else await CategoryRecipe.create({
+                        categoryId: reqCategoryIds[catIndex],
+                        recipeId: req.body.recipeId,
+                        createdBy: req.modifiedBy,
+                        modifiedBy: req.modifiedBy
+                    })
+                }
+
+                for (var cat in dbCategories) {
+                    if (reqCategoryIds.some(c => c == dbCategories[cat].categoryId)) continue;
+                    else await CategoryRecipe.destroy({
+                        where: { categoryRecipeId: dbCategories[cat].categoryRecipeId }
+                    })
+                }
+
                 if (num == 1) {
                     res.send(req.body)
                 } else {

@@ -34,6 +34,12 @@ RecipeList.init({
     categories: {
         type: DataTypes.STRING
     },
+    stateId: {
+        type: DataTypes.STRING
+    },
+    stateName: {
+        type: DataTypes.STRING
+    },
     createdBy: {
         type: DataTypes.STRING
     }

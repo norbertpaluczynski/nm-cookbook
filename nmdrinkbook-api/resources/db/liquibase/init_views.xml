@@ -30,19 +30,24 @@
             R."image",
             R."difficultyLevel",
             S."views",
+            ST."stateId",
+            ST."name" as "stateName",
             R."createdBy",
             (SELECT AVG(rating) FROM rating WHERE "recipeId" = R."recipeId") rating,
             (SELECT json_agg(json_build_object('categoryId', "categoryId", 'name', "name"))
             FROM public."RecipeCategories"
             WHERE "recipeId"=R."recipeId")::text categories
             FROM public.recipe AS R
-            JOIN public.stat AS S ON (S."recipeId" = R."recipeId")
+            JOIN public.stat AS S ON S."recipeId" = R."recipeId"
+            JOIN public.state ST ON R."stateId" = ST."stateId"
             GROUP BY R."recipeId",
             R."title",
             R."description",
             R."preparationTime",
             R."difficultyLevel",
-            S."views"
+            S."views",
+            ST."stateId",
+            ST."name"
        </createView> 
     </changeSet>
     <changeSet id="views-3" author="dev">
@@ -70,6 +75,7 @@
                 viewName="RecipeHeader">
             SELECT
             R."recipeId",
+            R."stateId",
             R."title",
             R."description",
             R."preparationSteps",
@@ -83,6 +89,7 @@
             JOIN public.stat AS S ON (S."recipeId" = R."recipeId")
             GROUP BY
             R."recipeId",
+            R."stateId",
             R."title",
             R."description",
             R."preparationSteps",

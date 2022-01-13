@@ -21,6 +21,11 @@ export const useRecipe = () => {
     return response.data
   }
 
+  const getMyRecipeDetails = async (id: string): Promise<RecipeDetails> => {
+    const response = await $axios.get<RecipeDetails>(`/recipedetails/findMyRecipeByid/${id}`)
+    return response.data
+  }
+
   const createEmptyRecipe = async (): Promise<Recipe> => {
     const response = await $axios.post<Recipe>('/recipe/createEmpty', {})
     return response.data
@@ -40,6 +45,7 @@ export const useRecipe = () => {
     getRecipeRows,
     getMyRecipeRows,
     getRecipeDetails,
+    getMyRecipeDetails,
     createEmptyRecipe,
     saveRecipe,
     deleteRecipe

@@ -13,16 +13,9 @@ State.init({
     name: {
         type: DataTypes.STRING
     },
-    createdBy: {
-        type: DataTypes.STRING
-    },
-    modifiedBy: {
-        type: DataTypes.STRING
-    }
 }, {
     sequelize,
     modelName: 'State',
     tableName: 'state',
-    timestamps: true,
-    updatedAt: 'modifiedAt'
+    timestamps: false
 });

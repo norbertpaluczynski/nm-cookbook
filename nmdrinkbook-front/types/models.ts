@@ -6,6 +6,7 @@ export interface Recipe {
   preparatioSteps: string
   preparationTime: number
   difficultyLevel: number
+  categories: Category[]
   image: string
 }
 

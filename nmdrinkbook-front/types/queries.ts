@@ -10,6 +10,8 @@ export interface RecipeRow {
   categories: Category[]
   views: number
   rating: number
+  stateId: string
+  stateName: string
 }
 
 export interface IngredientRow {
@@ -23,6 +25,7 @@ export interface IngredientRow {
 
 export interface RecipeDetails {
   recipeId: string
+  stateId: string
   title: string
   description: string
   preparatioSteps: string

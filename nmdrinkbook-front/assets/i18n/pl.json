@@ -2,7 +2,8 @@
   "buttons": {
     "login": "Zaloguj",
     "register": "Zarejestruj",
-    "logout": "Wyloguj"
+    "logout": "Wyloguj",
+    "save": "Zapisz"
   },
   "labels": {
     "username": "Nazwa użytkownika",
@@ -14,7 +15,12 @@
     "difficultyLevel": "Trudność przygotowania",
     "preparationTime": "Czas przygotowania",
     "pageSize": "Ilość wierszy",
-    "orderBy": "Sortuj według"
+    "orderBy": "Sortuj według",
+    "description": "Opis",
+    "preparationSteps": "Sposób przygotowania",
+    "categories": "Kategorie",
+    "link": "Link do grafiki",
+    "state": "Status"
   },
   "input-errors": {
     "required": "Pole wymagane",
@@ -50,5 +56,8 @@
     "articles": "Artykuły",
     "units": "Jednostki",
     "categories": "Kategorie"
+  },
+  "inputErrors": {
+    "required": "Pole wymagane"
   }
 }

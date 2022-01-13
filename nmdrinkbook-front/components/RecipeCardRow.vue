@@ -6,7 +6,7 @@
       <v-row>
         <v-col cols="12" sm="6" md="4">
           <Nuxt-link :to="`/drink/${row.recipeId}`" style="text-decoration: none">
-            <v-img :src="row.image" height="100%"/>
+            <v-img :src="row.image" height="100%" max-height="230px"/>
           </Nuxt-link>
         </v-col>
         <v-col cols="12" sm="6" md="8">

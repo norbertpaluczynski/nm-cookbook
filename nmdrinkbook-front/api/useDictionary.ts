@@ -1,5 +1,5 @@
 import { useContext } from "@nuxtjs/composition-api"
-import { Category } from "~/types/models"
+import { Category, State } from "~/types/models"
 
 export const useDictionary = () => {
   const { $axios } = useContext()
@@ -9,8 +9,14 @@ export const useDictionary = () => {
     return response.data
   }
 
+  const getStates = async (): Promise<State[]> => {
+    const response = await $axios.get<State[]>('/state/findAll')
+    return response.data
+  }
+
   return {
     getCategories,
+    getStates
   }
 }
 

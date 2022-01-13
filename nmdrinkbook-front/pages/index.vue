@@ -236,7 +236,7 @@ import useRecipe from '~/api/useRecipe'
 import { PagedRecipeFilter, RecipeFilter } from '~/types/filters'
 import { Category } from '~/types/models'
 import { RecipeRow } from '~/types/queries'
-import useCategory from '~/api/useCategory'
+import useCategory from '~/api/useDictionary'
 
 export default Vue.extend({
   auth: false,

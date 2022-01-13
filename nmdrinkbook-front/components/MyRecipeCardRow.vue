@@ -6,7 +6,7 @@
       <v-row>
         <v-col cols="12" sm="4" md="2">
           <Nuxt-link :to="`/drink/${row.recipeId}`" style="text-decoration: none">
-            <v-img :src="row.image" height="100%"/>
+            <v-img :src="row.image" height="100%" max-height="130px"/>
           </Nuxt-link>
         </v-col>
         <v-col cols="10" sm="7" md="9">
@@ -14,6 +14,7 @@
             <Nuxt-link :to="`/drink/${row.recipeId}`" style="text-decoration: none">
               {{ row.title }}
             </Nuxt-link>
+            <span class="text-caption ml-4">{{ row.stateName }}</span>
           </v-card-title>
           <v-card-subtitle class="pt-2">
             <template v-for="category in row.categories">
@@ -33,7 +34,7 @@
         </v-col>
         <v-col cols="2" sm="1" md="1">
           <v-card-actions class="d-flex flex-column justify-space-between fill-height">
-            <v-btn icon outlined color="success" class="ma-0" @click="editRecipe">
+            <v-btn icon outlined color="success" class="ma-0 mb-4" @click="editRecipe">
               <v-icon>mdi-pencil</v-icon>
             </v-btn>
             <v-btn icon outlined color="error" class="ma-0" @click="removeRecipe">

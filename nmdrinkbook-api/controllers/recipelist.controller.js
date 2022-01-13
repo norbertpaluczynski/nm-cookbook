@@ -40,7 +40,7 @@ export const recipeListController = () => {
             }
         }
         if (categoryId) where.categories = { [Op.like]: `%${categoryId}%` }
-        
+        where.stateId = { [Op.eq]: '3252b299-5308-4cb1-98c2-6cba843b6f11' }
 
         const { count, rows } = RecipeList.findAndCountAll({
             where,
@@ -67,14 +67,6 @@ export const recipeListController = () => {
 
         let pageNumber = req.body.pageNumber
         let pageSize = req.body.pageSize
-        let title = req.body.filter.title
-        let preparationTimeFrom = req.body.filter.preparationTimeFrom
-        let preparationTimeTo = req.body.filter.preparationTimeTo
-        let difficultyLevelFrom = req.body.filter.difficultyLevelFrom
-        let difficultyLevelTo = req.body.filter.difficultyLevelTo
-        let ratingFrom = req.body.filter.ratingFrom
-        let ratingTo = req.body.filter.ratingTo
-        let categoryId = req.body.filter.categoryId
 
         let where = {}
 
@@ -84,19 +76,7 @@ export const recipeListController = () => {
             var decoded = jwt_decode(token)
             let createdBy = decoded['preferred_username']
             where.createdBy = { [Op.eq]: createdBy }
-        }
-
-        if (title) where.title = { [Op.eq]: title }
-        if (preparationTimeFrom && preparationTimeTo) where.preparationTime = { [Op.between]: [preparationTimeFrom, preparationTimeTo] }
-        if (difficultyLevelFrom && difficultyLevelTo) where.difficultyLevel = { [Op.between]: [difficultyLevelFrom, difficultyLevelTo] }
-        if (ratingFrom && ratingTo) where.rating = { 
-            [Op.or]: {
-                [Op.between]: [ratingFrom, ratingTo],
-                [Op.eq]: null
-            }
-        }
-        if (categoryId) where.categories = { [Op.like]: `%${categoryId}%` }
-        
+        }        
 
         const { count, rows } = RecipeList.findAndCountAll({
             where,
