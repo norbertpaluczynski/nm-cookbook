@@ -100,9 +100,20 @@ export const ingredientController = () => {
             });
     }
 
-    //TODO get all for recipeId
+    const findAllByRecipeId = (req, res) => {
+        const id = req.params.id
+        Ingredient.findAll({ where: {recipeId: id} })
+            .then(data => {
+                res.send(data)
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message: err.message || "Unknown error."
+                })
+            });
+    }
 
-    return { create, save, remove, findById, findAll }
+    return { create, save, remove, findById, findAll, findAllByRecipeId }
 }
 
 export default ingredientController
