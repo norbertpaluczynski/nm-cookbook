@@ -10,7 +10,7 @@ export const unitController = () => {
         // }
     
         const unit = {
-            name: req.body.name,
+            symbol: req.body.symbol,
             createdBy: req.createdBy,
             modifiedBy: req.modifiedBy
         }
@@ -53,7 +53,7 @@ export const unitController = () => {
         const id = req.params.id
 
         Unit.destroy({
-            where: { articleId: id }
+            where: { unitId: id }
         })
             .then(num => {
                 if (num == 1) {

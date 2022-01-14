@@ -24,7 +24,9 @@
     "state": "Status",
     "article": "Artykuł",
     "unit": "Jednostka",
-    "quantity": "Ilość"
+    "quantity": "Ilość",
+    "alcoholVolume": "Zawartość alkoholu (%)",
+    "category": "Kategoria"
   },
   "input-errors": {
     "required": "Pole wymagane",
@@ -37,7 +39,10 @@
     "register": "Rejestracja",
     "preparationSteps": "Sposób przygotowania",
     "ingredients": "Składniki",
-    "newIngredient": "Nowy składnik"
+    "newIngredient": "Nowy składnik",
+    "articles": "Artykuły",
+    "units": "Jednostki",
+    "categories": "Kategorie"
   },
   "tooltips": {
     "rating": "Ocena",

@@ -45,7 +45,7 @@ import { ls } from '~/commons/constants'
 export default Vue.extend({
   name: 'default',
   setup() {
-    const { app, $auth, redirect } = useContext()
+    const { app } = useContext()
 
     const title = 'NMdrinkbook'
     const clipped: Ref<boolean> = ref(true)

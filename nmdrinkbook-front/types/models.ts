@@ -11,7 +11,7 @@ export interface Recipe {
 }
 
 export interface Ingredient {
-  ingredientId?: string
+  ingredientId: string
   recipeId: string
   articleId: string
   unitId: string
@@ -19,19 +19,19 @@ export interface Ingredient {
 }
 
 export interface Article {
-  articleId?: string
+  articleId: string
   articleName: string
   description: string
   alcoholVolume: number
 }
 
 export interface Unit {
-  unitId?: string
+  unitId: string
   symbol: string
 }
 
 export interface Category {
-  categoryId?: string
+  categoryId: string
   name: string
 }
 
@@ -41,7 +41,7 @@ export interface State {
 }
 
 export interface Rating {
-  ratingId?: string
+  ratingId: string
   recipeId: string
   userId: string
   rating: number
