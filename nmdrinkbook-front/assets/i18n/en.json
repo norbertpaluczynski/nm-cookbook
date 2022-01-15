@@ -1,7 +1,10 @@
 {
   "buttons": {
     "login": "Log in",
-    "register": "Register"
+    "register": "Register",
+    "logout": "Logout",
+    "save": "Save",
+    "cancel": "Cancel"
   },
   "labels": {
     "username": "Username",
@@ -13,7 +16,17 @@
     "difficultyLevel": "Difficulty level",
     "preparationTime": "Preparation time",
     "pageSize": "Page size",
-    "orderBy": "Order by"
+    "orderBy": "Order by",
+    "description": "Description",
+    "preparationSteps": "Preparation steps",
+    "categories": "Categories",
+    "link": "Image URL",
+    "state": "Status",
+    "article": "Article",
+    "unit": "Unit",
+    "quantity": "Quantity",
+    "alcoholVolume": "Alcohol volume (%)",
+    "category": "Category"
   },
   "input-errors": {
     "required": "Required",
@@ -25,7 +38,11 @@
     "login": "Sign in",
     "register": "Sign up",
     "preparationSteps": "Preparation steps",
-    "ingredients": "Ingredients"
+    "ingredients": "Ingredients",
+    "newIngredient": "New ingredient",
+    "articles": "Articles",
+    "units": "Units",
+    "categories": "Categories"
   },
   "tooltips": {
     "rating": "Rating",
@@ -41,5 +58,17 @@
       "difficultyLevel": "Difficulty level",
       "preparationTime": "Preparation time"
     }
+  },
+  "menuItems": {
+    "drinkList": "Drinks",
+    "myRecipes": "My recipes",
+    "addRecipe": "Add recipe",
+    "articles": "Articles",
+    "units": "Units",
+    "categories": "Categories",
+    "statistics": "Statistics"
+  },
+  "inputErrors": {
+    "required": "Field required"
   }
 }
