@@ -94,7 +94,7 @@ export default Vue.extend({
         label: 'statistics',
         path: '/statistics',
         icon: 'mdi-chart-bar',
-        isVisible: true || $auth.loggedIn && token.value?.resource_access?.nmclient?.roles?.includes('admin')
+        isVisible: $auth.loggedIn && token.value?.resource_access?.nmclient?.roles?.includes('admin')
       },
     ])
 
