@@ -82,7 +82,7 @@ export default Vue.extend({
         label: 'units',
         path: '/units',
         icon: 'mdi-beaker',
-        isVisible: $auth.loggedIn && token.value?.resource_access?.nmclient?.roles?.includes('admin')
+        isVisible: $auth.loggedIn && token.value.resource_access.nmclient.roles.includes('admin')
       },
       {
         label: 'categories',
@@ -103,7 +103,7 @@ export default Vue.extend({
     }
 
     const register = () => {
-      redirect('http://localhost:28080/auth/realms/nmdrinkbook/protocol/openid-connect/registrations?client_id=nmclient&response_type=code&scope=openid%20profile%20email&redirect_uri=http%3A%2F%2Flocalhost%3A3000&kc_locale=pl')
+      redirect('http://nmdrinkbookkeycloak.nrbserv.com/auth/realms/nmdrinkbook/protocol/openid-connect/registrations?client_id=nmclient&response_type=code&scope=openid%20profile%20email&redirect_uri=https%3A%2F%2Fnmdrinkbook.nrbserv.com')
     }
 
     const logout = () => {

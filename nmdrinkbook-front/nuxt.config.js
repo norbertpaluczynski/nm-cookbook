@@ -55,8 +55,8 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: process.env.API_URL || 'http://nm-api:8000',
-    browserBaseURL: 'http://localhost:8000'
+    baseURL: process.env.API_URL || 'https://nmdrinkbookapi.nrbserv.com',
+    browserBaseURL: 'https://nmdrinkbookapi.nrbserv.com'
   },
   auth: {
     strategies: {
@@ -64,11 +64,11 @@ export default {
       keycloak: {
         scheme: 'oauth2',
         endpoints: {
-          authorization: 'http://localhost:28080/auth/realms/nmdrinkbook/protocol/openid-connect/auth',
-          token: 'http://localhost:28080/auth/realms/nmdrinkbook/protocol/openid-connect/token',
-          userInfo: 'http://localhost:28080/auth/realms/nmdrinkbook/protocol/openid-connect/userinfo',
-          user: 'http://localhost:28080/auth/realms/nmdrinkbook/protocol/openid-connect/userinfo',
-          logout: 'http://localhost:28080/auth/realms/nmdrinkbook/protocol/openid-connect/logout?redirect_uri=' + encodeURIComponent('http://localhost:3000')
+          authorization: 'https://nmdrinkbookkeycloak.nrbserv.com/auth/realms/nmdrinkbook/protocol/openid-connect/auth',
+          token: 'https://nmdrinkbookkeycloak.nrbserv.com/auth/realms/nmdrinkbook/protocol/openid-connect/token',
+          userInfo: 'https://nmdrinkbookkeycloak.nrbserv.com/auth/realms/nmdrinkbook/protocol/openid-connect/userinfo',
+          user: 'https://nmdrinkbookkeycloak.nrbserv.com/auth/realms/nmdrinkbook/protocol/openid-connect/userinfo',
+          logout: 'https://nmdrinkbookkeycloak.nrbserv.com/auth/realms/nmdrinkbook/protocol/openid-connect/logout?redirect_uri=' + encodeURIComponent('https://nmdrinkbook.nrbserv.com')
         },
         token: {
           property: 'access_token',
@@ -85,7 +85,7 @@ export default {
         clientId: 'nmclient',
         scope: ['openid', 'profile', 'email'],
         codeChallengeMethod: 'S256',
-        redirectUri: 'http://localhost:3000'
+        redirectUri: 'https://nmdrinkbook.nrbserv.com'
       }
     },
     redirect: false
