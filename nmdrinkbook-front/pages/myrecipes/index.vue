@@ -81,7 +81,7 @@ import { RecipeRow } from '~/types/queries'
 export default Vue.extend({
   auth: false,
   setup() {
-    const { i18n } = useContext()
+    const { i18n, app } = useContext()
     const { getMyRecipeRows } = useRecipe()
 
     const rows: Ref<RecipeRow[]> = ref([])
@@ -128,6 +128,9 @@ export default Vue.extend({
       .then(response => {
         rows.value = response.rows
         totalCount.value = response.count
+      })
+      .catch(() => {
+        app.router?.push('/')
       })
     }
 

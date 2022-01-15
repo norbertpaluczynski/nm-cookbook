@@ -47,3 +47,8 @@ export interface Rating {
   rating: number
   comment: string
 }
+
+export interface ArticleStat {
+  article: string
+  count: number
+}
