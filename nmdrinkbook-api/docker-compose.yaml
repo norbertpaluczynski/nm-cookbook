@@ -24,7 +24,7 @@ services:
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
 
   keycloak:
-    image: jboss/keycloak:latest
+    image: wizzn/keycloak:14
     container_name: keycloak
     depends_on:
       - postgres
@@ -50,6 +50,24 @@ services:
         '-Dkeycloak.migration.strategy=OVERWRITE_EXISTING',
       ]
     restart: unless-stopped
+  nm-api:
+    image: norbertpal/nmdrinkbook-api
+    container_name: nm-api
+    ports:
+      - "8000:8000"
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+      - DB_DATABASE=keycloak
+      - DB_USER=keycloak
+      - DB_PASSWORD=keycloak
+      - KEYCLOAK_USER=admin
+      - KEYCLOAK_PASSWORD=admin
+  nm-front:
+    image: norbertpal/nmdrinkbook-front
+    container_name: nm-front
+    ports:
+      - "3000:3000"
 
 volumes:
   pgdata:

@@ -6,12 +6,12 @@ export const PORT = process.env.PORT || 8000
 export const liquibaseConfig = {
     ...POSTGRESQL_DEFAULT_CONFIG,
     changeLogFile: './resources/db/liquibase/changeLog.xml',
-    url: 'jdbc:postgresql://localhost:5432/nmdrinkbook',
+    url: 'jdbc:postgresql://postgres:5432/nmdrinkbook',
     username: 'nmdrinkbook',
     password: 'nmdrinkbook',
 }
 
-export const sequelize = new Sequelize('postgres://nmdrinkbook:nmdrinkbook@localhost:5432/nmdrinkbook')
+export const sequelize = new Sequelize('postgres://nmdrinkbook:nmdrinkbook@postgres:5432/nmdrinkbook')
 
 export const swaggerOptions = {
 	definition: {
