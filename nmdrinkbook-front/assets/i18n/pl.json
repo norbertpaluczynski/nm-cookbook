@@ -65,7 +65,8 @@
     "addRecipe": "Dodaj przepis",
     "articles": "Artykuły",
     "units": "Jednostki",
-    "categories": "Kategorie"
+    "categories": "Kategorie",
+    "statistics": "Statystyki"
   },
   "inputErrors": {
     "required": "Pole wymagane"
