@@ -1,4 +1,5 @@
 import Article from '../models/article.model.js'
+import jwt_decode from 'jwt-decode'
 
 export const articleController = () => {
     const create = (req, res) => {

@@ -1,5 +1,6 @@
 import e from 'cors';
 import Category from '../models/category.model.js'
+import jwt_decode from 'jwt-decode'
 
 export const categoryController = () => {
     const create = (req, res) => {
