@@ -1,28 +1,18 @@
 <template>
   <v-container>
-    <v-row justify="center" align="center">
-      <v-col cols="12" sm="12" md="12" lg="8">
+    <v-row justify="left" align="center">
+      <v-col cols="12" sm="6" md="6" lg="4">
         <v-card>
           <v-toolbar>
             <v-toolbar-title>{{ $t('headers.mostPopularArticles') }}</v-toolbar-title>
           </v-toolbar>
           <v-card-text>
-            <v-sheet>
-              <v-sparkline
-                :labels="articles"
-                :value="articlesCount"
-                color="primary"
-                auto-line-width
-                :line-width="2"
-                :label-size="5"
-                type="bars"
-              >
-                <template v-slot:label="item">
-                  {{ item.value }}
-                  ({{ articlesCount[item.index] }})
-                </template>
-              </v-sparkline>
-            </v-sheet>
+            <v-list>
+              <v-list-item v-for="article in articles" :key="article.article">
+                <v-list-item-title>{{article.article}}</v-list-item-title>
+                <v-list-item-subtitle class="text-right">{{article.count}}</v-list-item-subtitle>
+              </v-list-item>
+            </v-list>
           </v-card-text>
         </v-card>
       </v-col>
@@ -34,25 +24,23 @@
 import { onMounted, ref, Ref, useContext } from '@nuxtjs/composition-api'
 import Vue from 'vue'
 import useStat from '~/api/useStat'
+import { ArticleStat } from '~/types/models'
 
 export default Vue.extend({
   auth: false,
   setup() {
     const { getMostPopularArticle } = useStat()
-    const articles: Ref<string[]> = ref([])
-    const articlesCount: Ref<number[]> = ref([])
+    const articles: Ref<ArticleStat[]> = ref([])
 
     onMounted(() => {
       getMostPopularArticle()
       .then(response => {
-        articles.value = response.map(a => a.article)
-        articlesCount.value = response.map(a => a.count)
+        articles.value = response
       })
     })
 
     return {
       articles,
-      articlesCount
     }
   }
 })
