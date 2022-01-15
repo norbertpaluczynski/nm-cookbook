@@ -6,12 +6,6 @@ export interface DictionaryRow {
 export interface MenuItem {
   label: string
   path: string
-  accessType: AccesType
+  isVisible: boolean
   icon: string
-}
-
-export enum AccesType {
-  public = 'public',
-  user = 'user',
-  admin = 'admin'
 }

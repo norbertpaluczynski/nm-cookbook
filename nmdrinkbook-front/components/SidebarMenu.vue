@@ -1,8 +1,19 @@
 <template>
   <div class="d-flex flex-column justify-space-between fill-height">
     <v-list>
+      <v-list-item v-if="$auth.loggedIn">
+        <v-list-item-icon class="ml-2">
+          <v-icon>mdi-account-circle</v-icon>
+        </v-list-item-icon>
+        <v-list-item-content>
+          <v-list-item-title>{{ $auth.user.name }}</v-list-item-title>
+          <v-list-item-subtitle>{{ $auth.user.email }}</v-list-item-subtitle>
+        </v-list-item-content>
+      </v-list-item>
+      <v-divider/>
       <v-list-item
         v-for="item in menuItems"
+        v-show="item.isVisible"
         :key="item.path"
         :to="item.path"
       >
@@ -25,50 +36,59 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Ref, ref, useContext } from '@nuxtjs/composition-api'
-import { MenuItem, AccesType } from '~/types/common'
+import { onMounted, Ref, ref, useContext } from '@nuxtjs/composition-api'
+import { MenuItem } from '~/types/common'
+import jwt from 'jwt-decode'
 
 export default Vue.extend({
   name: 'default',
   setup() {
     const { app, $auth, redirect } = useContext()
+    const token: Ref<any> = ref({})
+
+    onMounted(() => {
+      if($auth.loggedIn) {
+        // @ts-ignore
+        token.value = jwt($auth.strategies['keycloak'].token.get())
+      }
+    })
 
     const menuItems: Ref<MenuItem[]> = ref([
       {
         label: 'drinkList',
         path: '/',
-        accessType: AccesType.public,
-        icon: 'mdi-glass-wine'
+        icon: 'mdi-glass-wine',
+        isVisible: true
       },
       {
         label: 'myRecipes',
         path: '/myrecipes',
-        accessType: AccesType.user,
-        icon: 'mdi-text-box-multiple'
+        icon: 'mdi-text-box-multiple',
+        isVisible: $auth.loggedIn
       },
       {
         label: 'addRecipe',
         path: '/myrecipes/new',
-        accessType: AccesType.user,
-        icon: 'mdi-text-box-plus'
+        icon: 'mdi-text-box-plus',
+        isVisible: $auth.loggedIn
       },
       {
         label: 'articles',
         path: '/articles',
-        accessType: AccesType.admin,
-        icon: 'mdi-food-variant'
+        icon: 'mdi-food-variant',
+        isVisible: $auth.loggedIn && token.value?.resource_access?.nmclient?.roles?.includes('admin')
       },
       {
         label: 'units',
         path: '/units',
-        accessType: AccesType.admin,
-        icon: 'mdi-beaker'
+        icon: 'mdi-beaker',
+        isVisible: $auth.loggedIn && token.value?.resource_access?.nmclient?.roles?.includes('admin')
       },
       {
         label: 'categories',
         path: '/categories',
-        accessType: AccesType.admin,
-        icon: 'mdi-shape'
+        icon: 'mdi-shape',
+        isVisible: $auth.loggedIn && token.value?.resource_access?.nmclient?.roles?.includes('admin')
       },
     ])
 
