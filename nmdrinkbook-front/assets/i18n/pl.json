@@ -42,7 +42,8 @@
     "newIngredient": "Nowy składnik",
     "articles": "Artykuły",
     "units": "Jednostki",
-    "categories": "Kategorie"
+    "categories": "Kategorie",
+    "mostPopularArticles": "Najpopularniejsze artykuły"
   },
   "tooltips": {
     "rating": "Ocena",
