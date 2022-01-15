@@ -269,6 +269,9 @@ export default Vue.extend({
         .then(response => {
           recipe.value = response
         })
+        .catch(() => {
+          app.router?.push('/')
+        })
     }
 
     const createNew = () => {

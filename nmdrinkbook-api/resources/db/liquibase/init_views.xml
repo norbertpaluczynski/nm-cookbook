@@ -102,4 +102,19 @@
             S."views"
         </createView>
     </changeSet>
+    <changeSet id="views-5" author="dev">
+        <createView catalogName="cat"
+                replaceIfExists="true"
+                schemaName="public"
+                viewName="MostPopularArticles">
+            SELECT 
+            A."articleName" article,
+            COUNT(A."articleId") count
+            FROM public."article" A
+            JOIN public."ingredient" I ON A."articleId" = I."articleId"
+            GROUP BY A."articleName"
+            ORDER BY count DESC
+            LIMIT 10
+        </createView>
+    </changeSet>
 </databaseChangeLog>

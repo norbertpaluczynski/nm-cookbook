@@ -42,15 +42,16 @@ export const  recipeDetailsController = () => {
     const findMyRecipeById = (req, res) => {
         const id = req.params.id
         var authHeader = req.headers.authorization
+        if (authHeader) {
+            const Op = Sequelize.Op
+            let where = {}
+            var token = authHeader.substring(7, authHeader.length)
+            var decoded = jwt_decode(token)
+            let createdBy = decoded['preferred_username']
+            where.createdBy = { [Op.eq]: createdBy }
         
-        var token = authHeader.substring(7, authHeader.length)
-        var decoded = jwt_decode(token)
-        let createdBy = decoded['preferred_username']
-
-        RecipeHeader.findOne({ where: {recipeId: id} })
+            RecipeHeader.findOne({ where: {recipeId: id} })
             .then(async (data) => {
-                console.log(createdBy)
-                console.log(data.createdBy)
                 if (data.createdBy != createdBy) {
                     res.status(401).send()
                 } else {
@@ -77,8 +78,10 @@ export const  recipeDetailsController = () => {
                     message: err.message || "Unknown error."
                 })
             });
+        } else {
+            res.status(401).send()
+        }
     }
-
 
     return { findById, findMyRecipeById }
 }

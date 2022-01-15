@@ -90,6 +90,12 @@ export default Vue.extend({
         icon: 'mdi-shape',
         isVisible: $auth.loggedIn && token.value?.resource_access?.nmclient?.roles?.includes('admin')
       },
+      {
+        label: 'statistics',
+        path: '/statistics',
+        icon: 'mdi-chart-bar',
+        isVisible: true || $auth.loggedIn && token.value?.resource_access?.nmclient?.roles?.includes('admin')
+      },
     ])
 
     const login = () => {

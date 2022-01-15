@@ -76,24 +76,26 @@ export const recipeListController = () => {
             var decoded = jwt_decode(token)
             let createdBy = decoded['preferred_username']
             where.createdBy = { [Op.eq]: createdBy }
-        }        
 
-        const { count, rows } = RecipeList.findAndCountAll({
-            where,
-            offset: pageSize * (pageNumber - 1),
-            limit: pageSize,
-            order: [
-                [req.body.orderBy, req.body.isAscending ? 'ASC' : 'DESC']
-            ]
-        }).then(data => {
-            data.rows.forEach(r => r.categories = JSON.parse(r.categories))
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: err.message || "Unknown error."
+            const { count, rows } = RecipeList.findAndCountAll({
+                where,
+                offset: pageSize * (pageNumber - 1),
+                limit: pageSize,
+                order: [
+                    [req.body.orderBy, req.body.isAscending ? 'ASC' : 'DESC']
+                ]
+            }).then(data => {
+                data.rows.forEach(r => r.categories = JSON.parse(r.categories))
+                res.send(data);
             })
-        });
+            .catch(err => {
+                res.status(500).send({
+                    message: err.message || "Unknown error."
+                })
+            });
+        } else {
+            res.status(401).send()
+        }
     }
 
 

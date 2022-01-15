@@ -1,3 +1,4 @@
+import MostPopularArticles from '../models/mostpopulararticles.model.js';
 import Stat from '../models/stat.model.js'
 
 export const statController = () => {
@@ -91,7 +92,19 @@ export const statController = () => {
             });
     }
 
-    return { create, save, remove, findById, findAll }
+    const getMostPopularArticles = (req, res) => {
+        MostPopularArticles.findAll()
+        .then(data => {
+            res.send(data)
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "Unknown error."
+            })
+        });
+    }
+
+    return { create, save, remove, findById, findAll, getMostPopularArticles }
 }
 
 export default statController
