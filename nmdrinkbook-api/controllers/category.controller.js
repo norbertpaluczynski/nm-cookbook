@@ -11,60 +11,68 @@ export const categoryController = () => {
         // }
         var authHeader = req.headers.authorization
         
-        var token = authHeader.substring(7, authHeader.length)
-        var decoded = jwt_decode(token)
-        let is_admin = decoded['resource_access']['nmclient']['roles'].includes('admin')
-    
-        if (!is_admin) {
-            res.status(401).send()
-        } else {
-            const category = {
-                name: req.body.name,
-                createdBy: req.createdBy,
-                modifiedBy: req.modifiedBy
-            }
+        if (authHeader) {
+            var token = authHeader.substring(7, authHeader.length)
+            var decoded = jwt_decode(token)
+            let is_admin = decoded['resource_access']['nmclient']['roles'].includes('admin')
         
-            Category.create(category)
-                .then(data => {
-                    res.send(data);
-                })
-                .catch(err => {
-                    res.status(500).send({
-                        message: err.message || "Unknown error."
+            if (!is_admin) {
+                res.status(401).send()
+            } else {
+                const category = {
+                    name: req.body.name,
+                    createdBy: req.createdBy,
+                    modifiedBy: req.modifiedBy
+                }
+            
+                Category.create(category)
+                    .then(data => {
+                        res.send(data);
                     })
-                });
-        }        
+                    .catch(err => {
+                        res.status(500).send({
+                            message: err.message || "Unknown error."
+                        })
+                    });
+            }     
+        } else {
+            res.status(401).send()
+        }
     };
 
     const save = (req ,res) => {
         const id = req.params.id
         req.body.modifiedBy = req.modifiedBy
         var authHeader = req.headers.authorization
-        
-        var token = authHeader.substring(7, authHeader.length)
-        var decoded = jwt_decode(token)
-        let is_admin = decoded['resource_access']['nmclient']['roles'].includes('admin')
 
-        if (!is_admin) {
-            res.status(401).send()
-        } else {
-            Category.update(req.body, {
-                where: { categoryId: id }
-            })
-                .then(num => {
-                    if (num == 1) {
-                        res.send(req.body)
-                    } else {
-                        res.status(500).send({
-                            message: "error"
-                        })
-                    }
+        if (authHeader) {
+            var token = authHeader.substring(7, authHeader.length)
+            var decoded = jwt_decode(token)
+            let is_admin = decoded['resource_access']['nmclient']['roles'].includes('admin')
+    
+            if (!is_admin) {
+                res.status(401).send()
+            } else {
+                Category.update(req.body, {
+                    where: { categoryId: id }
                 })
-                .catch(err => {
-                    res.status(500).send({
-                        message: "error catch"
+                    .then(num => {
+                        if (num == 1) {
+                            res.send(req.body)
+                        } else {
+                            res.status(500).send({
+                                message: "error"
+                            })
+                        }
                     })
-                })
+                    .catch(err => {
+                        res.status(500).send({
+                            message: "error catch"
+                        })
+                    })
+            }
+        } else {
+            res.status(401).send()
         }
     }
 
@@ -72,30 +80,32 @@ export const categoryController = () => {
         const id = req.params.id
         var authHeader = req.headers.authorization
         
-        var token = authHeader.substring(7, authHeader.length)
-        var decoded = jwt_decode(token)
-        let is_admin = decoded['resource_access']['nmclient']['roles'].includes('admin')
+        if (authHeader) {
+            var token = authHeader.substring(7, authHeader.length)
+            var decoded = jwt_decode(token)
+            let is_admin = decoded['resource_access']['nmclient']['roles'].includes('admin')
 
-        if (!is_admin) {
-            res.status(401).send()
-        } else {
-            Category.destroy({
-                where: { categoryId: id }
-            })
-                .then(num => {
-                    if (num == 1) {
-                        res.status(204).send();
-                    } else {
-                        res.send({
-                            message: `error`
-                        });
-                    }
+            if (!is_admin) {
+                res.status(401).send()
+            } else {
+                Category.destroy({
+                    where: { categoryId: id }
                 })
-                .catch(err => {
-                    res.status(500).send({
-                    message: "error catch"
-                    });
-              });
+                    .then(num => {
+                        if (num == 1) {
+                            res.status(204).send();
+                        } else {
+                            res.send({
+                                message: `error`
+                            });
+                        }
+                    })
+                    .catch(err => {
+                        res.status(500).send({
+                        message: "error catch"
+                        });
+                });
+            }
         }
     }
 
