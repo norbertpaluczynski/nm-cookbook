@@ -85,6 +85,7 @@
             R."difficultyLevel",
             R."image",
             S."views",
+            R."createdBy",
             (SELECT AVG(rating) FROM rating WHERE "recipeId" = R."recipeId") rating
             FROM public.recipe AS R
             JOIN public.category_recipe AS CR ON (R."recipeId" = CR."recipeId")

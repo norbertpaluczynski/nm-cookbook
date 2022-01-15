@@ -3,6 +3,7 @@ import RecipeCategories from '../models/recipecategories.model.js'
 import IngredientList from '../models/ingredientlist.model.js'
 import Stat from '../models/stat.model.js'
 import { Sequelize } from 'sequelize'
+import jwt_decode from 'jwt-decode'
 
 export const  recipeDetailsController = () => {
     const findById = (req, res) => {
@@ -40,25 +41,36 @@ export const  recipeDetailsController = () => {
 
     const findMyRecipeById = (req, res) => {
         const id = req.params.id
+        var authHeader = req.headers.authorization
+        
+        var token = authHeader.substring(7, authHeader.length)
+        var decoded = jwt_decode(token)
+        let createdBy = decoded['preferred_username']
 
         RecipeHeader.findOne({ where: {recipeId: id} })
             .then(async (data) => {
-                const categories = await RecipeCategories.findAll({ where: {recipeId: id} })
-                const ingredients = await IngredientList.findAll({ where: {recipeId: id} })
-                res.send({
-                    recipeId: data.recipeId,
-                    stateId: data.stateId,
-                    title: data.title,
-                    description: data.description,
-                    preparationSteps: data.preparationSteps,
-                    preparationTime: data.preparationTime,
-                    difficultyLevel: data.difficultyLevel,
-                    image: data.image,
-                    views: data.views,
-                    rating: data.rating,
-                    categories,
-                    ingredients
-                })
+                console.log(createdBy)
+                console.log(data.createdBy)
+                if (data.createdBy != createdBy) {
+                    res.status(401).send()
+                } else {
+                    const categories = await RecipeCategories.findAll({ where: {recipeId: id} })
+                    const ingredients = await IngredientList.findAll({ where: {recipeId: id} })
+                    res.send({
+                        recipeId: data.recipeId,
+                        stateId: data.stateId,
+                        title: data.title,
+                        description: data.description,
+                        preparationSteps: data.preparationSteps,
+                        preparationTime: data.preparationTime,
+                        difficultyLevel: data.difficultyLevel,
+                        image: data.image,
+                        views: data.views,
+                        rating: data.rating,
+                        categories,
+                        ingredients
+                    })
+                } 
             })
             .catch(err => {
                 res.status(500).send({

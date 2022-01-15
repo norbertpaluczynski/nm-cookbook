@@ -36,6 +36,9 @@ RecipeHeader.init({
     },
     rating: {
         type: DataTypes.DECIMAL
+    },
+    createdBy: {
+        type: DataTypes.STRING
     }
 }, {
     sequelize,
