@@ -45,58 +45,58 @@ export default Vue.extend({
   setup() {
     const { app, $auth, redirect } = useContext()
     const token: Ref<any> = ref({})
+    const menuItems: Ref<MenuItem[]> = ref([])
 
     onMounted(() => {
       if($auth.loggedIn) {
         // @ts-ignore
         token.value = jwt($auth.strategies['keycloak'].token.get())
       }
+      menuItems.value = [
+        {
+          label: 'drinkList',
+          path: '/',
+          icon: 'mdi-glass-wine',
+          isVisible: true
+        },
+        {
+          label: 'myRecipes',
+          path: '/myrecipes',
+          icon: 'mdi-text-box-multiple',
+          isVisible: $auth.loggedIn
+        },
+        {
+          label: 'addRecipe',
+          path: '/myrecipes/new',
+          icon: 'mdi-text-box-plus',
+          isVisible: $auth.loggedIn
+        },
+        {
+          label: 'articles',
+          path: '/articles',
+          icon: 'mdi-food-variant',
+          isVisible: $auth.loggedIn && token.value?.resource_access?.nmclient?.roles?.includes('admin')
+        },
+        {
+          label: 'units',
+          path: '/units',
+          icon: 'mdi-beaker',
+          isVisible: $auth.loggedIn && token.value?.resource_access?.nmclient?.roles?.includes('admin')
+        },
+        {
+          label: 'categories',
+          path: '/categories',
+          icon: 'mdi-shape',
+          isVisible: $auth.loggedIn && token.value?.resource_access?.nmclient?.roles?.includes('admin')
+        },
+        {
+          label: 'statistics',
+          path: '/statistics',
+          icon: 'mdi-chart-bar',
+          isVisible: $auth.loggedIn && token.value?.resource_access?.nmclient?.roles?.includes('admin')
+        },
+      ]
     })
-
-    const menuItems: Ref<MenuItem[]> = ref([
-      {
-        label: 'drinkList',
-        path: '/',
-        icon: 'mdi-glass-wine',
-        isVisible: true
-      },
-      {
-        label: 'myRecipes',
-        path: '/myrecipes',
-        icon: 'mdi-text-box-multiple',
-        isVisible: $auth.loggedIn
-      },
-      {
-        label: 'addRecipe',
-        path: '/myrecipes/new',
-        icon: 'mdi-text-box-plus',
-        isVisible: $auth.loggedIn
-      },
-      {
-        label: 'articles',
-        path: '/articles',
-        icon: 'mdi-food-variant',
-        isVisible: $auth.loggedIn && token.value?.resource_access?.nmclient?.roles?.includes('admin')
-      },
-      {
-        label: 'units',
-        path: '/units',
-        icon: 'mdi-beaker',
-        isVisible: $auth.loggedIn && token.value.resource_access.nmclient.roles.includes('admin')
-      },
-      {
-        label: 'categories',
-        path: '/categories',
-        icon: 'mdi-shape',
-        isVisible: $auth.loggedIn && token.value?.resource_access?.nmclient?.roles?.includes('admin')
-      },
-      {
-        label: 'statistics',
-        path: '/statistics',
-        icon: 'mdi-chart-bar',
-        isVisible: $auth.loggedIn && token.value?.resource_access?.nmclient?.roles?.includes('admin')
-      },
-    ])
 
     const login = () => {
       $auth.loginWith('keycloak')
