@@ -24,7 +24,8 @@ services:
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
 
   keycloak:
-    image: wizzn/keycloak:14
+    #image: wizzn/keycloak:14
+    image: jboss/keycloak:latest
     container_name: keycloak
     depends_on:
       - postgres
@@ -51,7 +52,7 @@ services:
       ]
     restart: unless-stopped
   nm-api:
-    image: norbertpal/nmdrinkbook-api
+    image: gitea.nrbserv.com/palkshh/nmdrinkbook-api:latest
     container_name: nm-api
     ports:
       - "8000:8000"
@@ -64,7 +65,7 @@ services:
       - KEYCLOAK_USER=admin
       - KEYCLOAK_PASSWORD=admin
   nm-front:
-    image: norbertpal/nmdrinkbook-front
+    image: gitea.nrbserv.com/palkshh/nmdrinkbook-front:latest
     container_name: nm-front
     ports:
       - "3000:3000"

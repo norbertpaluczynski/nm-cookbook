@@ -30,7 +30,7 @@ export const recipeListController = () => {
         let where = {}
 
 
-        if (title) where.title = { [Op.eq]: title }
+        if (title) where.title = { [Op.like]: `%${title}%` }
         if (preparationTimeFrom && preparationTimeTo) where.preparationTime = { [Op.between]: [preparationTimeFrom, preparationTimeTo] }
         if (difficultyLevelFrom && difficultyLevelTo) where.difficultyLevel = { [Op.between]: [difficultyLevelFrom, difficultyLevelTo] }
         if (ratingFrom && ratingTo) where.rating = { 
