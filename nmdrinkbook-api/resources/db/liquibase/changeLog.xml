@@ -6,6 +6,7 @@
     http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
    <include relativeToChangelogFile="true" file="init_db.xml"/>
    <include relativeToChangelogFile="true" file="init_seed.xml"/>
+   <include relativeToChangelogFile="true" file="init_seed_random.xml"/>
    <include relativeToChangelogFile="true" file="init_views.xml"/>
    <include relativeToChangelogFile="true" file="init_recipe_seed.xml"/>
 </databaseChangeLog>
